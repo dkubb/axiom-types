@@ -1,18 +1,37 @@
-*.gem
-*.rbc
-.bundle
-.config
-coverage
-InstalledFiles
-lib/bundler/man
-pkg
-rdoc
-spec/reports
-test/tmp
-test/version_tmp
-tmp
+## MAC OS
+.DS_Store
 
-# YARD artifacts
+## TEXTMATE
+*.tmproj
+tmtags
+
+## EMACS
+*~
+\#*
+.\#*
+
+## VIM
+*.swp
+
+## Rubinius
+*.rbc
+.rbx
+
+## PROJECT::GENERAL
+*.gem
+coverage
+profiling
+turbulence
+rdoc
+pkg
+tmp
+doc
+log
 .yardoc
-_yardoc
-doc/
+measurements
+
+## BUNDLER
+.bundle
+Gemfile.lock
+
+## PROJECT::SPECIFIC
