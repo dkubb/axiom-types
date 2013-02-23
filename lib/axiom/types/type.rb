@@ -36,7 +36,8 @@ module Axiom
       def self.include?(object)
         included = constraint.call(object)
         if included != true && included != false
-          raise TypeError, "must return true or false, but was #{included.inspect}"
+          raise TypeError,
+            "constraint must return true or false, but was #{included.inspect}"
         end
         included
       end
