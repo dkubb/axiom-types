@@ -16,6 +16,7 @@ module Axiom
       # constrainted key/value types.
 
       def self.finalize
+        return self if finalized?
         # TODO: lookup the types that handle the key/value primitives and then
         # setup a constraint for the keys and values.
         super

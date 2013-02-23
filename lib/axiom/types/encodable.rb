@@ -13,6 +13,7 @@ module Axiom
         end
 
         def finalize
+          return self if finalized?
           constraint do |object|
             object.respond_to?(:encoding) &&
             object.encoding.equal?(encoding) ||

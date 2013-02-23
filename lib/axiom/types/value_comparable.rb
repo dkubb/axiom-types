@@ -17,6 +17,7 @@ module Axiom
       end
 
       def finalize
+        return self if finalized?
         value_between(minimum, maximum)
         super
       end

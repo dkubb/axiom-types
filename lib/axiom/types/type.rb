@@ -46,6 +46,10 @@ module Axiom
         IceNine.deep_freeze(self)
       end
 
+      def self.finalized?
+        frozen?
+      end
+
     end # class Type
   end # module Types
 end # module Axiom
