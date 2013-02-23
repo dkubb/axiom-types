@@ -60,11 +60,10 @@ module Axiom
       #
       # @api private
       def define_option_method(option)
-        ivar = "@#{option}".freeze
+        ivar = "@#{option}"
         singleton_class.class_eval do
           define_method(option) do |*args|
             return instance_variable_get(ivar) if args.empty?
-            # TODO: consider deep dup/freezing of args
             instance_variable_set(ivar, *args)
             self
           end
