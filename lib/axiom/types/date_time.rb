@@ -7,13 +7,14 @@ module Axiom
     class DateTime < Object
       extend ValueComparable
 
-      MAXIMUM_NSEC_IN_SECONDS = 1 - Rational(1, 10**9)
+      # Maximum number of seconds and fractional seconds
+      MAXIMUM_SECONDS = 60 - Rational(1, 10**9)
 
       primitive       ::DateTime
       coercion_method :to_datetime
 
       minimum primitive.new(1, 1, 1)
-      maximum primitive.new(9999, 12, 31, 23, 59, 59 + MAXIMUM_NSEC_IN_SECONDS)
+      maximum primitive.new(9999, 12, 31, 23, 59, MAXIMUM_SECONDS)
 
     end # class DateTime
   end # module Types
