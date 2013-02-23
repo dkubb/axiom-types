@@ -27,6 +27,8 @@ module Axiom
       end
 
       def self.includes(*set)
+        # TODO: benchmark the cross-over point where it is more efficient to use
+        # a Set than an Array, and then consider conditionally converting?
         set.uniq!
         constraint { |object| set.include?(object) }
       end
