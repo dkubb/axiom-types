@@ -16,7 +16,11 @@ Gem::Specification.new do |gem|
   gem.test_files       = `git ls-files spec/{unit,integration}`.split($/)
   gem.extra_rdoc_files = %w[LICENSE README.md TODO]
 
+  gem.add_runtime_dependency('backports',           '~> 2.8.2')
   gem.add_runtime_dependency('descendants_tracker', '~> 0.0.1')
-  gem.add_runtime_dependency('equalizer',           '~> 0.0.4')
   gem.add_runtime_dependency('ice_nine',            '~> 0.7.0')
+
+  gem.add_development_dependency('rake',  '~> 10.0.3')
+  gem.add_development_dependency('rspec', '~> 1.3.2')
+  gem.add_development_dependency('yard',  '~> 0.8.4.1')
 end
