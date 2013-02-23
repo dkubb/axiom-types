@@ -14,9 +14,9 @@ module Axiom
         raise NotImplementedError, "#{inspect} should not be instantiated"
       end
 
-      def self.constraint(constraint = nil, &block)
-        constraint ||= block
-        current      = @constraint
+      def self.constraint(constraint = Undefined, &block)
+        constraint = block if constraint.equal?(Undefined)
+        current    = @constraint
         return current if constraint.nil?
         @constraint = if current
           lambda { |object| current.call(object) && constraint.call(object) }
