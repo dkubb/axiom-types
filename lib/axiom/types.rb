@@ -13,6 +13,11 @@ module Axiom
     # Represent an undefined argument
     Undefined = Object.new.freeze
 
+    def self.finalize
+      Type.descendants.each(&:finalize)
+      self
+    end
+
   end # module Types
 end # module Axiom
 
