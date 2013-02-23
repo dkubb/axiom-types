@@ -2,3 +2,4 @@ TODO
 ----
 
 * Add mechanism to find best matching type for a given primitive.
+* Add finite limits to all "primitive" types.
