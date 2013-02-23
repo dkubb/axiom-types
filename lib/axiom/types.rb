@@ -4,7 +4,7 @@ require 'bigdecimal'
 require 'date'
 require 'set'
 
-require 'adamantium'
+require 'ice_nine'
 require 'descendants_tracker'
 
 module Axiom
