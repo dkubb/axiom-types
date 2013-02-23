@@ -6,11 +6,11 @@ module Axiom
     # Represents an object type
     class Object < Type
       accept_options  :primitive, :coercion_method
-      primitive       ::Object
+      primitive       RUBY_VERSION >= '1.9' && defined?(::BasicObject) ? ::BasicObject : ::Object
       coercion_method :to_object
 
       def self.include?(object)
-        object.kind_of?(primitive) && super
+        primitive === object && super
       end
 
     end # class Object
