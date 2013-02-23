@@ -14,6 +14,7 @@ module Axiom
 
         def finalize
           constraint do |object|
+            object.respond_to?(:encoding) &&
             object.encoding.equal?(encoding) ||
             (encoding.ascii_compatible? && object.to_s.ascii_only?)
           end

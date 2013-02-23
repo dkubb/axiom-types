@@ -11,7 +11,9 @@ module Axiom
       end
 
       def value_between(minium, maximum)
-        constraint { |object| object.between?(minium, maximum) }
+        constraint do |object|
+          object.respond_to?(:between?) && object.between?(minium, maximum)
+        end
       end
 
       def finalize
