@@ -3,3 +3,6 @@ TODO
 
 * Add mechanism to find best matching type for a given primitive.
 * Add finite limits to all "primitive" types.
+* Add optional constraint on Date for the timezone
+* Add optional constraint on DateTime for the timezone
+* Add optional constraint on Time for the timezone
