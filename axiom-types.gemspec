@@ -15,4 +15,8 @@ Gem::Specification.new do |gem|
   gem.files            = `git ls-files`.split($/)
   gem.test_files       = `git ls-files spec/{unit,integration}`.split($/)
   gem.extra_rdoc_files = %w[LICENSE README.md TODO]
+
+  gem.add_runtime_dependency('adamantium',          '~> 0.0.6')
+  gem.add_runtime_dependency('descendants_tracker', '~> 0.0.1')
+  gem.add_runtime_dependency('equalizer',           '~> 0.0.4')
 end
