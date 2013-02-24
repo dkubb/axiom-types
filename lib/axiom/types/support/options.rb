@@ -56,17 +56,17 @@ module Axiom
 
       # Adds a reader/writer method for the give option name
       #
+      # @param [#to_s] name
+      #
       # @return [undefined]
       #
       # @api private
       def define_option_method(option)
         ivar = "@#{option}"
-        singleton_class.class_eval do
-          define_method(option) do |*args|
-            return instance_variable_get(ivar) if args.empty?
-            instance_variable_set(ivar, *args)
-            self
-          end
+        define_singleton_method(option) do |*args|
+          return instance_variable_get(ivar) if args.empty?
+          instance_variable_set(ivar, *args)
+          self
         end
       end
 
