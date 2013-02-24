@@ -6,7 +6,7 @@ module Axiom
     # Represents an object type
     class Object < Type
       accept_options  :primitive, :coercion_method
-      primitive       RUBY_VERSION >= '1.9' && defined?(::BasicObject) ? ::BasicObject : ::Object
+      primitive       ::Object.superclass || ::Object
       coercion_method :to_object
 
       def self.finalize
