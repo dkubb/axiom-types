@@ -26,7 +26,8 @@ module Axiom
         self
       end
 
-      # TODO: move this into a module
+      # TODO: move this into a module. separate the constraint setup from
+      # declaration of the members, like the comparable modules.
       def self.includes(*members)
         set = IceNine.deep_freeze(members.to_set)
         constraint { |object| set.include?(object) }
