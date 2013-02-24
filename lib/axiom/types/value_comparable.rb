@@ -10,16 +10,18 @@ module Axiom
         descendant.accept_options :minimum, :maximum
       end
 
-      def value_between(minium, maximum)
-        constraint do |object|
-          object.respond_to?(:between?) && object.between?(minium, maximum)
-        end
-      end
-
       def finalize
         return self if finalized?
         value_between(IceNine.deep_freeze(minimum), IceNine.deep_freeze(maximum))
         super
+      end
+
+    private
+
+      def value_between(minium, maximum)
+        constraint do |object|
+          object.respond_to?(:between?) && object.between?(minium, maximum)
+        end
       end
 
     end # module ValueComparable

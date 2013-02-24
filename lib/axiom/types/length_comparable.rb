@@ -10,16 +10,18 @@ module Axiom
         descendant.accept_options :minimum_length, :maximum_length
       end
 
-      def length_between(minium, maximum)
-        constraint do |object|
-          object.respond_to?(:length) && object.length.between?(minium, maximum)
-        end
-      end
-
       def finalize
         return self if finalized?
         length_between(minimum_length, maximum_length)
         super
+      end
+
+    private
+
+      def length_between(minium, maximum)
+        constraint do |object|
+          object.respond_to?(:length) && object.length.between?(minium, maximum)
+        end
       end
 
     end # module LengthComparable
