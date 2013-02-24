@@ -41,7 +41,8 @@ module Axiom
       end
 
       def self.finalize
-        IceNine.deep_freeze(self)
+        IceNine.deep_freeze(@constraint)
+        freeze
       end
 
       def self.finalized?
