@@ -11,9 +11,15 @@ module Axiom
 
       def self.finalize
         return self if finalized?
-        constraint { |object| primitive === object }
+        inherits_from(primitive)
         super
       end
+
+      def self.inherits_from(primitive)
+        constraint { |object| primitive === object }
+      end
+
+      private_class_method :inherits_from
 
     end # class Object
   end # module Types

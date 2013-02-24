@@ -20,14 +20,20 @@ module Axiom
 
       def self.finalize
         return self if finalized?
+        matches(key_type, value_type)
+        super
+      end
+
+      def self.matches(key_type, value_type)
         constraint do |hash|
           # TODO: change to #to_h when added to backports
           hash.respond_to?(:to_hash) && hash.to_hash.all? do |key, value|
             key_type.include?(key) && value_type.include?(value)
           end
         end
-        super
       end
+
+      private_class_method :matches
 
     end # class Hash
   end # module Types

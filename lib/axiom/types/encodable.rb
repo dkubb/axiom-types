@@ -14,12 +14,17 @@ module Axiom
 
         def finalize
           return self if finalized?
+          has_encoding(encoding)
+          super
+        end
+
+      private
+
+        def has_encoding(encoding)
           constraint do |object|
-            object.respond_to?(:encoding) &&
-            object.encoding.equal?(encoding) ||
+            object.respond_to?(:encoding) && object.encoding.equal?(encoding) ||
             (encoding.ascii_compatible? && object.to_s.ascii_only?)
           end
-          super
         end
       end
 
