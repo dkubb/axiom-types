@@ -9,16 +9,23 @@ module Axiom
       coercion_method :to_hash
       accept_options  :key_type, :value_type
 
-      key_type   ::Object
-      value_type ::Object
+      key_type   Object
+      value_type Object
 
       # TODO: create a factory method that returns a subtype with more
-      # constrainted key/value types.
+      # constrainted key/value types. This should be used with the lookup
+      # system so that the best matching type can be used. It could also check
+      # the descendants to see if a previously created type matches the key and
+      # value types, in which case it can be reused.
 
       def self.finalize
         return self if finalized?
-        # TODO: lookup the types that handle the key/value primitives and then
-        # setup a constraint for the keys and values.
+        constraint do |hash|
+          # TODO: change to #to_h when added to backports
+          hash.respond_to?(:to_hash) && hash.to_hash.all? do |key, value|
+            key_type.include?(key) && value_type.include?(value)
+          end
+        end
         super
       end
 
