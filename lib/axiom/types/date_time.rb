@@ -7,8 +7,8 @@ module Axiom
     class DateTime < Object
       extend ValueComparable
 
-      # Maximum number of seconds and fractional seconds
-      MAXIMUM_SECONDS = 60 - Rational(1, 10**9)
+      # The maximum seconds and fractional seconds for DateTime
+      MAXIMUM_SECONDS = 60 - Rational(1, 10**12)
 
       primitive       ::DateTime
       coercion_method :to_datetime
