@@ -26,10 +26,8 @@ module Axiom
         self
       end
 
-      def self.includes(*set)
-        # TODO: benchmark the cross-over point where it is more efficient to use
-        # a Set than an Array, and then consider conditionally converting?
-        set.uniq!
+      def self.includes(*members)
+        set = IceNine.deep_freeze(members.to_set)
         constraint { |object| set.include?(object) }
       end
 
