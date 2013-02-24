@@ -16,13 +16,8 @@ module Axiom
 
       def self.constraint(constraint = Undefined, &block)
         constraint = block if constraint.equal?(Undefined)
-        current    = @constraint
-        return current if constraint.nil?
-        @constraint = if current
-          lambda { |object| current.call(object) && constraint.call(object) }
-        else
-          constraint
-        end
+        return @constraint if constraint.nil?
+        add_constraint(constraint)
         self
       end
 
@@ -50,6 +45,17 @@ module Axiom
       def self.finalized?
         frozen?
       end
+
+      def self.add_constraint(constraint)
+        current = @constraint
+        @constraint = if current
+          lambda { |object| current.call(object) && constraint.call(object) }
+        else
+          constraint
+        end
+      end
+
+      private_class_method :add_constraint
 
     end # class Type
   end # module Types
