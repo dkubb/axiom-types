@@ -26,6 +26,7 @@ module Axiom
         self
       end
 
+      # TODO: move this into a module
       def self.includes(*members)
         set = IceNine.deep_freeze(members.to_set)
         constraint { |object| set.include?(object) }
