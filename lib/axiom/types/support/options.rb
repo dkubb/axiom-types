@@ -56,7 +56,7 @@ module Axiom
 
       # Adds a reader/writer method for the give option name
       #
-      # @param [#to_s] name
+      # @param [#to_s] option
       #
       # @return [undefined]
       #
