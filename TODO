@@ -14,3 +14,6 @@ TODO
 * When axiom-logic is available, replace the Proc based constraints with real
   predicates so that they can be serialized into SQL or optimized, etc.
   * Can be performed as part of type finalization
+
+* Add regexp constraint to String
+* Add allowed characters constraint to String
