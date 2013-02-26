@@ -16,7 +16,7 @@ module Axiom
       end
 
       def self.inherits_from(primitive)
-        constraint { |object| primitive === object }
+        constraint(&primitive.method(:===))
       end
 
       private_class_method :inherits_from

@@ -25,7 +25,7 @@ module Axiom
       # declaration of the members, like the comparable modules.
       def self.includes(*members)
         set = IceNine.deep_freeze(members.to_set)
-        constraint { |object| set.include?(object) }
+        constraint(&set.method(:include?))
       end
 
       def self.include?(object)
