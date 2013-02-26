@@ -50,7 +50,7 @@ module Axiom
       def self.add_constraint(constraint)
         current = @constraint
         @constraint = if current
-          lambda { |object| current.call(object) && constraint.call(object) }
+          lambda { |object| constraint.call(object) && current.call(object) }
         else
           constraint
         end

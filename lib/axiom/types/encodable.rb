@@ -22,7 +22,7 @@ module Axiom
 
         def has_encoding(encoding)
           constraint do |object|
-            object.respond_to?(:encoding) && object.encoding.equal?(encoding) ||
+            object.encoding.equal?(encoding) ||
             (encoding.ascii_compatible? && object.to_s.ascii_only?)
           end
         end

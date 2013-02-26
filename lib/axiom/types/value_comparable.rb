@@ -19,9 +19,7 @@ module Axiom
     private
 
       def value_between(minium, maximum)
-        constraint do |object|
-          object.respond_to?(:between?) && object.between?(minium, maximum)
-        end
+        constraint { |object| object.between?(minium, maximum) }
       end
 
     end # module ValueComparable
