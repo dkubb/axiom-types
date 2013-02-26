@@ -54,22 +54,6 @@ module Axiom
 
     protected
 
-      # Adds a reader/writer method for the give option name
-      #
-      # @param [#to_s] option
-      #
-      # @return [undefined]
-      #
-      # @api private
-      def define_option_method(option)
-        ivar = "@#{option}"
-        define_singleton_method(option) do |*args|
-          return instance_variable_get(ivar) if args.empty?
-          instance_variable_set(ivar, *args)
-          self
-        end
-      end
-
       # Sets default options
       #
       # @param [#each] new_options
@@ -108,6 +92,22 @@ module Axiom
       def inherited(descendant)
         super
         descendant.add_accepted_options(accepted_options).set_options(options)
+      end
+
+      # Adds a reader/writer method for the give option name
+      #
+      # @param [#to_s] option
+      #
+      # @return [undefined]
+      #
+      # @api private
+      def define_option_method(option)
+        ivar = "@#{option}"
+        define_singleton_method(option) do |*args|
+          return instance_variable_get(ivar) if args.empty?
+          instance_variable_set(ivar, *args)
+          self
+        end
       end
 
     end # module Options
