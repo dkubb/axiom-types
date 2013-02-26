@@ -10,8 +10,12 @@ module Axiom
       accept_options :constraint
       constraint proc { true }
 
-      def self.new
-        raise NotImplementedError, "#{inspect} should not be instantiated"
+      def self.new(constraint = Undefined, &block)
+        ::Class.new(self) do
+          constraint(constraint)
+          instance_exec(&block) if block
+          finalize
+        end
       end
 
       def self.finalize

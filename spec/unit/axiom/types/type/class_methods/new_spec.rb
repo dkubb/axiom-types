@@ -1,25 +1,69 @@
 require 'spec_helper'
 
 describe Axiom::Types::Type, '.new' do
-  subject { object.new }
+  let(:undefined) { Axiom::Types::Undefined }
 
-  context 'when called directly' do
+  context 'with no arguments' do
+    subject { object.new }
+
     let(:object) { described_class }
 
-    specify do
-      expect { subject }.to raise_error(
-        NotImplementedError, 'Axiom::Types::Type should not be instantiated'
-      )
+    it { should be_instance_of(Class) }
+
+    it { should be_frozen }
+
+    its(:ancestors) { should include(object) }
+
+    it 'has no constraints' do
+      should include(undefined)
     end
   end
 
-  context 'when called on a descendant' do
-    let(:object) { Class.new(described_class) }
+  context 'with a constraint' do
+    subject { object.new(proc { false }) }
 
-    specify do
-      expect { subject }.to raise_error(
-        NotImplementedError, "#{object.inspect} should not be instantiated"
-      )
+    let(:object) { described_class }
+
+    it { should be_instance_of(Class) }
+
+    it { should be_frozen }
+
+    its(:ancestors) { should include(object) }
+
+    it 'has constraints' do
+      should_not include(undefined)
+    end
+  end
+
+  context 'with a block' do
+    subject { object.new {} }
+
+    let(:object) { described_class }
+
+    it { should be_instance_of(Class) }
+
+    it { should be_frozen }
+
+    its(:ancestors) { should include(object) }
+
+    it 'has no constraints' do
+      should include(undefined)
+    end
+  end
+
+  context 'with a constraint and block' do
+    subject { object.new(proc { false }) {} }
+
+    let(:object) { described_class }
+
+    it { should be_instance_of(Class) }
+
+    it { should be_frozen }
+
+    its(:ancestors) { should include(object) }
+
+    it 'has constraints' do
+      should_not include(undefined)
     end
   end
 end
