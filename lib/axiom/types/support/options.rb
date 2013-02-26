@@ -16,8 +16,9 @@ module Axiom
       # @api public
       def options
         accepted_options.each_with_object({}) do |name, options|
-          next unless instance_variable_defined?("@#{name}")
-          options[name] = public_send(name)
+          ivar = "@#{name}"
+          next unless instance_variable_defined?(ivar)
+          options[name] = instance_variable_get(ivar)
         end
       end
 

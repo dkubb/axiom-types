@@ -11,11 +11,7 @@ module Axiom
       constraint proc { true }
 
       def self.new(constraint = Undefined, &block)
-        ::Class.new(self) do
-          constraint(constraint)
-          instance_exec(&block) if block
-          finalize
-        end
+        ::Class.new(self, &block).constraint(constraint).finalize
       end
 
       def self.finalize
@@ -28,7 +24,7 @@ module Axiom
       end
 
       def self.include?(object)
-        included = constraint.call(object)
+        included = @constraint.call(object)
         if included != true && included != false
           raise TypeError,
             "constraint must return true or false, but was #{included.inspect}"
@@ -38,8 +34,7 @@ module Axiom
 
       def self.constraint(constraint = Undefined, &block)
         constraint = block if constraint.equal?(Undefined)
-        return @constraint if constraint.nil?
-        add_constraint(constraint)
+        add_constraint(constraint) unless constraint.nil?
         self
       end
 
