@@ -15,9 +15,9 @@ module Axiom
       #
       # @api public
       def options
-        accepted_options.each_with_object({}) do |option_name, options|
-          option_value         = public_send(option_name)
-          options[option_name] = option_value unless option_value.nil?
+        accepted_options.each_with_object({}) do |name, options|
+          next unless instance_variable_defined?("@#{name}")
+          options[name] = public_send(name)
         end
       end
 
