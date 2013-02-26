@@ -14,18 +14,13 @@ module Axiom
         raise NotImplementedError, "#{inspect} should not be instantiated"
       end
 
-      def self.constraint(constraint = Undefined, &block)
-        constraint = block if constraint.equal?(Undefined)
-        return @constraint if constraint.nil?
-        add_constraint(constraint)
-        self
+      def self.finalize
+        IceNine.deep_freeze(@constraint)
+        freeze
       end
 
-      # TODO: move this into a module. separate the constraint setup from
-      # declaration of the members, like the comparable modules.
-      def self.includes(*members)
-        set = IceNine.deep_freeze(members.to_set)
-        constraint(&set.method(:include?))
+      def self.finalized?
+        frozen?
       end
 
       def self.include?(object)
@@ -37,13 +32,20 @@ module Axiom
         included
       end
 
-      def self.finalize
-        IceNine.deep_freeze(@constraint)
-        freeze
+      def self.constraint(constraint = Undefined, &block)
+        constraint = block if constraint.equal?(Undefined)
+        return @constraint if constraint.nil?
+        add_constraint(constraint)
+        self
       end
 
-      def self.finalized?
-        frozen?
+      singleton_class.class_eval { protected :constraint }
+
+      # TODO: move this into a module. separate the constraint setup from
+      # declaration of the members, like the comparable modules.
+      def self.includes(*members)
+        set = IceNine.deep_freeze(members.to_set)
+        constraint(&set.method(:include?))
       end
 
       def self.add_constraint(constraint)
@@ -55,7 +57,7 @@ module Axiom
         end
       end
 
-      private_class_method :add_constraint
+      private_class_method :includes, :add_constraint
 
     end # class Type
   end # module Types
