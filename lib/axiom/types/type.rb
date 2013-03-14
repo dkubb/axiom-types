@@ -79,9 +79,8 @@ module Axiom
       # @api public
       def self.constraint(constraint = Undefined, &block)
         constraint = block if constraint.equal?(Undefined)
-        current    = @constraint
-        return current if constraint.nil?
-        add_constraint(constraint, current)
+        return @constraint if constraint.nil?
+        add_constraint(constraint)
         self
       end
 
@@ -91,13 +90,21 @@ module Axiom
       #
       # @todo move into a module
       #
-      # @api public
+      # @api private
       def self.includes(*members)
         set = IceNine.deep_freeze(members.to_set)
         constraint(&set.method(:include?))
       end
 
-      def self.add_constraint(constraint, current)
+      # Add new constraint to existing constraint, if any
+      #
+      # @param [#call] constraint
+      #
+      # @return [undefined]
+      #
+      # @api private
+      def self.add_constraint(constraint)
+        current     = @constraint
         @constraint = if current
           lambda { |object| constraint.call(object) && current.call(object) }
         else
