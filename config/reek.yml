@@ -11,7 +11,7 @@ LargeClass:
   max_methods: 0
   exclude: []
   enabled: true
-  max_instance_variables: 0
+  max_instance_variables: 1
 UncommunicativeMethodName:
   accept: []
   exclude: []
@@ -21,12 +21,13 @@ UncommunicativeMethodName:
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
 LongParameterList:
-  max_params: 0
+  max_params: 2
   exclude: []
   enabled: true
   overrides: {}
 FeatureEnvy:
-  exclude: []
+  exclude:
+    - Axiom::Types::Encodable#has_encoding
   enabled: true
 ClassVariable:
   exclude: []
@@ -46,18 +47,19 @@ UncommunicativeModuleName:
   - !ruby/regexp /[0-9]$/
 NestedIterators:
   ignore_iterators: []
-  exclude: []
+  exclude:
+    - Axiom::Types::Hash#self.matches
   enabled: true
-  max_allowed_nesting: 0
+  max_allowed_nesting: 1
 LongMethod:
-  max_statements: 0
+  max_statements: 5
   exclude: []
   enabled: true
 Duplication:
   allow_calls: []
   exclude: []
   enabled: true
-  max_calls: 0
+  max_calls: 1
 UtilityFunction:
   max_helper_calls: 0
   exclude: []
@@ -76,12 +78,12 @@ UncommunicativeVariableName:
 SimulatedPolymorphism:
   exclude: []
   enabled: true
-  max_ifs: 0
+  max_ifs: 1
 DataClump:
   exclude: []
   enabled: true
   max_copies: 0
-  min_clump_size: 0
+  min_clump_size: 2
 ControlCouple:
   exclude: []
   enabled: true
@@ -92,3 +94,7 @@ LongYieldList:
 UnusedParameters:
   enabled: true
   exclude: []
+NilCheck:
+  enabled: true
+  exclude:
+    - Axiom::Types::Type#self.constraint
