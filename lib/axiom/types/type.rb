@@ -38,8 +38,6 @@ module Axiom
         self
       end
 
-      singleton_class.class_eval { protected :constraint }
-
       # TODO: move this into a module. separate the constraint setup from
       # declaration of the members, like the comparable modules.
       def self.includes(*members)
