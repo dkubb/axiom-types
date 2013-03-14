@@ -14,6 +14,14 @@ module Axiom
     # Represent an undefined argument
     Undefined = Object.new.freeze
 
+    # Finalize Axiom::Types::Type subclasses
+    #
+    # @example
+    #   Axiom::Types.finalize  # => Axiom::Types
+    #
+    # @return [Axiom::Types]
+    #
+    # @api public
     def self.finalize
       Type.descendants.each(&:finalize)
       self
