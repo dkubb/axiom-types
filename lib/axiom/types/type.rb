@@ -45,10 +45,13 @@ module Axiom
         freeze
       end
 
-      def self.finalized?
-        frozen?
-      end
-
+      # Test if the object matches the type constraint
+      #
+      # @param [Object] object
+      #
+      # @return [Boolean]
+      #
+      # @api public
       def self.include?(object)
         included = @constraint.call(object)
         if included != true && included != false
