@@ -25,4 +25,7 @@ Dir[File.expand_path('../{support,shared}/**/*.rb', __FILE__)].each do |file|
 end
 
 RSpec.configure do |config|
+  config.expect_with :rspec do |expect_with|
+    expect_with.syntax = :expect
+  end
 end
