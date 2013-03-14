@@ -36,7 +36,11 @@ describe Axiom::Types::Type, '.new' do
   end
 
   context 'with a block' do
-    subject { object.new {} }
+    subject do
+      object.new do
+        constraint { false }
+      end
+    end
 
     let(:object) { described_class }
 
@@ -46,13 +50,17 @@ describe Axiom::Types::Type, '.new' do
 
     its(:ancestors) { should include(object) }
 
-    it 'has no constraints' do
-      should include(undefined)
+    it 'has constraints' do
+      should_not include(undefined)
     end
   end
 
   context 'with a constraint and block' do
-    subject { object.new(proc { false }) {} }
+    subject do
+      object.new(proc { false }) do
+        constraint { false }
+      end
+    end
 
     let(:object) { described_class }
 
