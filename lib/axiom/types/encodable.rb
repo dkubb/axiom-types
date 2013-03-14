@@ -13,7 +13,7 @@ module Axiom
         end
 
         def finalize
-          return self if finalized?
+          return self if frozen?
           has_encoding(encoding)
           super
         end

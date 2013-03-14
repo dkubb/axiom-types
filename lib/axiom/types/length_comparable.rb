@@ -11,7 +11,7 @@ module Axiom
       end
 
       def finalize
-        return self if finalized?
+        return self if frozen?
         length_between(minimum_length, maximum_length)
         super
       end

@@ -19,7 +19,7 @@ module Axiom
       # value types, in which case it can be reused.
 
       def self.finalize
-        return self if finalized?
+        return self if frozen?
         matches(key_type, value_type)
         super
       end

@@ -11,7 +11,7 @@ module Axiom
       end
 
       def finalize
-        return self if finalized?
+        return self if frozen?
         value_between(IceNine.deep_freeze(minimum), IceNine.deep_freeze(maximum))
         super
       end

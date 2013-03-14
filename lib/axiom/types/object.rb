@@ -10,7 +10,7 @@ module Axiom
       coercion_method :to_object
 
       def self.finalize
-        return self if finalized?
+        return self if frozen?
         inherits_from(primitive)
         super
       end
