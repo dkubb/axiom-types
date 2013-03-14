@@ -21,10 +21,10 @@ module Axiom
       # @yield [object]
       #
       # @yieldparam object [Object]
-      #   test if the object is the kind of type
+      #   test if the object matches the type constraint
       #
       # @yieldreturn [Boolean]
-      #   true if the object is the kind of type
+      #   true if the object matches the type constraint
       #
       # @return [Class<Axiom::Types::Type>]
       #
@@ -61,6 +61,22 @@ module Axiom
         included
       end
 
+      # Add a constraint to the type
+      #
+      # @param [#call] constraint
+      #   optional constraint
+      #
+      # @yield [object]
+      #
+      # @yieldparam object [Object]
+      #   test if the object matches the type constraint
+      #
+      # @yieldreturn [Boolean]
+      #   true if the object matches the type constraint
+      #
+      # @return [self]
+      #
+      # @api public
       def self.constraint(constraint = Undefined, &block)
         constraint = block if constraint.equal?(Undefined)
         current    = @constraint
@@ -69,8 +85,13 @@ module Axiom
         self
       end
 
-      # TODO: move this into a module. separate the constraint setup from
-      # declaration of the members, like the comparable modules.
+      # Add a constraint that the object must be included in a set
+      #
+      # @param [Array<Object>] members
+      #
+      # @todo move into a module
+      #
+      # @api public
       def self.includes(*members)
         set = IceNine.deep_freeze(members.to_set)
         constraint(&set.method(:include?))
