@@ -30,7 +30,9 @@ module Axiom
       #
       # @api public
       def self.new(constraint = Undefined, &block)
-        ::Class.new(self, &block).constraint(constraint).finalize
+        type = ::Class.new(self, &block)
+        type.constraint(constraint)
+        type.finalize
       end
 
       def self.finalize
