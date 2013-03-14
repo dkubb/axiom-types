@@ -111,7 +111,7 @@ module Axiom
         end
       end
 
-      private_class_method :includes, :add_constraint
+      private_class_method :add_constraint
 
     end # class Type
   end # module Types
