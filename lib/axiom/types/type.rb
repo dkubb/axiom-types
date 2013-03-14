@@ -8,7 +8,7 @@ module Axiom
       extend Options, DescendantsTracker
 
       accept_options :constraint
-      constraint proc { true }
+      constraint Tautology
 
       # Instantiate a new Axiom::Types::Type subclass
       #
@@ -105,7 +105,7 @@ module Axiom
       def self.add_constraint(constraint)
         current     = @constraint
         @constraint = if current
-          lambda { |object| constraint.call(object) && current.call(object) }
+          lambda { |object| current.call(object) && constraint.call(object) }
         else
           constraint
         end

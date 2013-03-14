@@ -14,6 +14,12 @@ module Axiom
     # Represent an undefined argument
     Undefined = Object.new.freeze
 
+    # A true proposition
+    Tautology = proc { true }.freeze
+
+    # A false proposition
+    Contradiction = proc { false }.freeze
+
     # Finalize Axiom::Types::Type subclasses
     #
     # @example
