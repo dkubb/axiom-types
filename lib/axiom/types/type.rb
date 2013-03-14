@@ -10,6 +10,25 @@ module Axiom
       accept_options :constraint
       constraint proc { true }
 
+      # Instantiate a new Axiom::Types::Type subclass
+      #
+      # @example
+      #   type = Axiom::Types::Type.new  # => Axiom::Types::Type
+      #
+      # @param [#call] constraint
+      #   optional constraint for the new type
+      #
+      # @yield [object]
+      #
+      # @yieldparam object [Object]
+      #   test if the object is the kind of type
+      #
+      # @yieldreturn [Boolean]
+      #   true if the object is the kind of type
+      #
+      # @return [Class<Axiom::Types::Type>]
+      #
+      # @api public
       def self.new(constraint = Undefined, &block)
         ::Class.new(self, &block).constraint(constraint).finalize
       end
