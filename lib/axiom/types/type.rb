@@ -53,7 +53,9 @@ module Axiom
 
       def self.constraint(constraint = Undefined, &block)
         constraint = block if constraint.equal?(Undefined)
-        add_constraint(constraint) unless constraint.nil?
+        current    = @constraint
+        return current if constraint.nil?
+        add_constraint(constraint, current)
         self
       end
 
@@ -64,8 +66,7 @@ module Axiom
         constraint(&set.method(:include?))
       end
 
-      def self.add_constraint(constraint)
-        current = @constraint
+      def self.add_constraint(constraint, current)
         @constraint = if current
           lambda { |object| constraint.call(object) && current.call(object) }
         else
