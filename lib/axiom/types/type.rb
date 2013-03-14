@@ -35,6 +35,11 @@ module Axiom
         type.finalize
       end
 
+      # Finalize by deep freezing the type
+      #
+      # @return [Axiom::Types::Type]
+      #
+      # @api private
       def self.finalize
         IceNine.deep_freeze(@constraint)
         freeze
