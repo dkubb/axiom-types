@@ -13,7 +13,7 @@ describe Axiom::Types::Type, '.constraint' do
   context 'with a callable object' do
     subject { object.constraint(Contradiction) }
 
-    it { should be(object) }
+    it_should_behave_like 'a command method'
 
     its(:constraint) { should respond_to(:call) }
     its(:constraint) { should_not be(Tautology) }
@@ -22,7 +22,7 @@ describe Axiom::Types::Type, '.constraint' do
   context 'with a block' do
     subject { object.constraint { false } }
 
-    it { should be(object) }
+    it_should_behave_like 'a command method'
 
     its(:constraint) { should respond_to(:call) }
     its(:constraint) { should_not be(Tautology) }
