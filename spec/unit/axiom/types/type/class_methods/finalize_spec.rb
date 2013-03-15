@@ -10,6 +10,7 @@ describe Axiom::Types::Type, '.finalize' do
   end
 
   it_should_behave_like 'a command method'
+  it_should_behave_like 'an idempotent method'
 
   it { should be_frozen }
 
