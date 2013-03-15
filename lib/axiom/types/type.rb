@@ -41,7 +41,8 @@ module Axiom
       #
       # @api private
       def self.finalize
-        IceNine.deep_freeze(self)
+        IceNine.deep_freeze(@constraint)
+        freeze
       end
 
       # Test if the object matches the type constraint
