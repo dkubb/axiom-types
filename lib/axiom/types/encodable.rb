@@ -31,11 +31,31 @@ module Axiom
         # @api private
         def finalize
           return self if frozen?
-          has_encoding
+          ascii_compatible? ? has_ascii_compatible_encoding : has_encoding
           super
         end
 
       private
+
+        # Test if the encoding is ascii compatible
+        #
+        # @return [Boolean]
+        #
+        # @api private
+        def ascii_compatible?
+          encoding.ascii_compatible?
+        end
+
+        # Add constraint for the ascii compatible encoding
+        #
+        # @return [undefined]
+        #
+        # @api private
+        def has_ascii_compatible_encoding
+          constraint do |object|
+            object.encoding.equal?(encoding) || object.to_s.ascii_only?
+          end
+        end
 
         # Add constraint for the encoding
         #
@@ -43,10 +63,7 @@ module Axiom
         #
         # @api private
         def has_encoding
-          constraint do |object|
-            object.encoding.equal?(encoding) ||
-            (encoding.ascii_compatible? && object.to_s.ascii_only?)
-          end
+          constraint { |object| object.encoding.equal?(encoding) }
         end
 
       end
