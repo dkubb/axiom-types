@@ -35,7 +35,7 @@ module Axiom
         type.finalize
       end
 
-      # Finalize by deep freezing the type
+      # Finalize by deep freezing
       #
       # @return [Axiom::Types::Type]
       #
