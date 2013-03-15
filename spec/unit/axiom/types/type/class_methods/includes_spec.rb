@@ -12,16 +12,15 @@ describe Axiom::Types::Type, '.includes' do
     it_should_behave_like 'a command method'
 
     it 'adds a constraint that returns true for a valid member' do
-      expect(object).to include(member)
+      should include(member)
     end
 
     it 'adds a constraint that returns false for an invalid member' do
-      expect(object).to include(Object.new)
+      should_not include(nil)
     end
 
     it 'freezes the members' do
-      subject
-      expect(member).to be_frozen
+      expect { subject }.to change(member, :frozen?).from(false).to(true)
     end
 
     it 'removes duplicate members' do
@@ -38,7 +37,7 @@ describe Axiom::Types::Type, '.includes' do
     it_should_behave_like 'a command method'
 
     it 'adds a constraint that returns false' do
-      expect(object).to include(Object.new)
+      should_not include(Object.new)
     end
   end
 end
