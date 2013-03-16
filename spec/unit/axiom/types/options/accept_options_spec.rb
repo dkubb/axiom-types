@@ -91,7 +91,7 @@ describe Axiom::Types::Options, '#accept_options' do
         expect(grand_child.primitive).to be(::String)
       end
 
-      it 'adds methods to the descendant, after inherited, that can set a value' do
+      it 'adds methods to the descendant from the object, after inherited, that can set a value' do
         subject
         force_inherit_from_child
         object.accept_options(:opt)
@@ -99,9 +99,24 @@ describe Axiom::Types::Options, '#accept_options' do
         expect(grand_child.opt).to be(:value)
       end
 
-      it 'sets the descendant defaults' do
+      it 'adds methods to the descendant from the child, after inherited, that can set a value' do
+        subject
+        force_inherit_from_child
+        child.accept_options(:opt)
+        grand_child.opt(:value)
+        expect(grand_child.opt).to be(:value)
+      end
+
+      it 'sets the descendant defaults from the object' do
         subject
         object.primitive(::String)
+        force_inherit_from_child
+        expect(grand_child.primitive).to be(::String)
+      end
+
+      it 'sets the descendant defaults from the child' do
+        subject
+        child.primitive(::String)
         force_inherit_from_child
         expect(grand_child.primitive).to be(::String)
       end

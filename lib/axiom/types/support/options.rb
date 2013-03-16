@@ -18,42 +18,29 @@ module Axiom
       #
       # @api public
       def accept_options(*new_options)
-        add_accepted_options(new_options)
-        new_options.each do |option|
-          assert_method_available(option)
-          define_option_method(option)
+        new_options.each do |new_option|
+          assert_method_available(new_option)
+          add_accepted_option(new_option)
+          define_option_method(new_option)
         end
-        #descendants.each do |descendant|
-        #  descendant.add_accepted_options(new_options)
-        #end
         self
       end
 
     protected
 
-      # Adds new options that an attribute class can accept
+      # Adds new option that an attribute class can accept
       #
-      # @param [#to_ary] new_options
-      #   new options to be added
-      #
-      # @return [self]
-      #
-      # @api private
-      def add_accepted_options(new_options)
-        accepted_options.concat(new_options)
-        self
-      end
-
-      # Sets default options
-      #
-      # @param [#each] new_options
-      #   options to be set
+      # @param [Symbol] new_option
+      #   new option to be added
       #
       # @return [self]
       #
       # @api private
-      def set_options(new_options)
-        new_options.each { |pair| public_send(*pair) }
+      def add_accepted_option(new_option)
+        accepted_options << new_option
+#        descendants.each do |descendant|
+#          descendant.public_send(__method__, new_option)
+#        end
         self
       end
 
@@ -68,7 +55,9 @@ module Axiom
       # @api private
       def inherited(descendant)
         super
-        descendant.add_accepted_options(accepted_options).set_options(options)
+        options.each do |option, value|
+          descendant.add_accepted_option(option).public_send(option, value)
+        end
       end
 
       # Returns default options hash for a given attribute class
@@ -120,14 +109,14 @@ module Axiom
 
       # Adds a reader/writer method for the give option name
       #
-      # @param [#to_s] option
+      # @param [#to_s] name
       #
       # @return [undefined]
       #
       # @api private
-      def define_option_method(option)
-        ivar = "@#{option}"
-        define_singleton_method(option) do |*args|
+      def define_option_method(name)
+        ivar = "@#{name}"
+        define_singleton_method(name) do |*args|
           return instance_variable_get(ivar) if args.empty?
           instance_variable_set(ivar, *args)
           self
