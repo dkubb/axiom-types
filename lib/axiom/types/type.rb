@@ -47,6 +47,17 @@ module Axiom
 
       # Test if the object matches the type constraint
       #
+      # @example
+      #   type = Axiom::Types::Integer.new do
+      #     minimum 1
+      #     maximum 100
+      #   end
+      #
+      #   type.include?(1)    # => true
+      #   type.include?(100)  # => true
+      #   type.include?(0)    # => false
+      #   type.include?(101)  # => false
+      #
       # @param [Object] object
       #
       # @return [Boolean]
@@ -62,6 +73,15 @@ module Axiom
       end
 
       # Add a constraint to the type
+      #
+      # @example with an argument
+      #   type.constraint(lambda { |object| object == 42 }
+      #
+      # @example with a block
+      #   type.constraint { |object| object == 42 }
+      #
+      # @example with no arguments
+      #   type.constraint  # => constraint
       #
       # @param [#call] constraint
       #   optional constraint
@@ -87,6 +107,8 @@ module Axiom
       # Add a constraint that the object must be included in a set
       #
       # @param [Array<Object>] members
+      #
+      # @return [undefined]
       #
       # @todo move into a module
       #

@@ -3,7 +3,7 @@
 module Axiom
   module Types
 
-    # Add a minimum and maximum constraint to a type
+    # Add a minimum and maximum value constraint to a type
     module ValueComparable
 
       # Hook called when module is extended
@@ -36,6 +36,8 @@ module Axiom
       # Add a constraint for a value within a range
       #
       # @return [undefined]
+      #
+      # @todo freeze the minimum and maximum
       #
       # @api private
       def has_value_within_range

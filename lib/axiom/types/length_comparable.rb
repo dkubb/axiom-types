@@ -37,6 +37,8 @@ module Axiom
       #
       # @return [undefined]
       #
+      # @todo freeze the minimum_length and maximum_length
+      #
       # @api private
       def has_length_within_range
         constraint do |object|
