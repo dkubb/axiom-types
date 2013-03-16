@@ -32,7 +32,7 @@ module Axiom
       # @api private
       def self.matches_key_and_value_types
         constraint do |object|
-          object.to_h.all? do |key, value|
+          object.all? do |key, value|
             key_type.include?(key) && value_type.include?(value)
           end
         end
