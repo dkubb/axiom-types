@@ -19,6 +19,8 @@ module Axiom
       # @api private
       def self.finalize
         return self if frozen?
+        key_type.finalize
+        value_type.finalize
         matches_key_and_value_types
         super
       end
