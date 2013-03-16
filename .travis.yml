@@ -21,5 +21,4 @@ matrix:
   allow_failures:
     - rvm: 1.9.3         # mutant coverage needed
     - rvm: rbx-19mode    # mutant coverage needed
-    - rvm: jruby-19mode  # yard parser reports incorrect coverage
     - rvm: jruby-head    # yard parser fails
