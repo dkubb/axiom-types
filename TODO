@@ -19,3 +19,7 @@ TODO
 * When axiom-logic is available, replace the Proc based constraints with real
   predicates so that they can be serialized into SQL or optimized, etc.
   * Can be performed as part of type finalization
+
+* Create a factory method for the Hash type
+  * Make sure the primitive lookup system can use the key/value to find the best
+    match for a given Hash type.

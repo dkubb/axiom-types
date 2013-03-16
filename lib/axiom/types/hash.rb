@@ -3,8 +3,8 @@
 module Axiom
   module Types
 
-    # Represents a decimal type
-    class Hash < Numeric
+    # Represents a hash type
+    class Hash < Object
       primitive       ::Hash
       coercion_method :to_hash
       accept_options  :key_type, :value_type
@@ -12,28 +12,31 @@ module Axiom
       key_type   Object
       value_type Object
 
-      # TODO: create a factory method that returns a subtype with more
-      # constrainted key/value types. This should be used with the lookup
-      # system so that the best matching type can be used. It could also check
-      # the descendants to see if a previously created type matches the key and
-      # value types, in which case it can be reused.
-
+      # Finalize by setting up constraints for the key and value
+      #
+      # @return [Axiom::Types::Object]
+      #
+      # @api private
       def self.finalize
         return self if frozen?
-        matches(key_type, value_type)
+        matches_key_and_value_types
         super
       end
 
-      def self.matches(key_type, value_type)
-        constraint do |hash|
-          # TODO: change to #to_h when added to backports
-          hash.to_hash.all? do |key, value|
+      # Add a constraints for the key and value
+      #
+      # @return [undefined]
+      #
+      # @api private
+      def self.matches_key_and_value_types
+        constraint do |object|
+          object.to_h.all? do |key, value|
             key_type.include?(key) && value_type.include?(value)
           end
         end
       end
 
-      private_class_method :matches
+      private_class_method :matches_key_and_value_types
 
     end # class Hash
   end # module Types
