@@ -64,7 +64,7 @@ module Axiom
       #
       # @api private
       def set_options(new_options)
-        new_options.each { |pair| public_send(*pair) }
+        new_options.merge(options).each { |pair| public_send(*pair) }
         self
       end
 
