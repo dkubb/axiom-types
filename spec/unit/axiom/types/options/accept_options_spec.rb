@@ -26,9 +26,9 @@ describe Axiom::Types::Options, '#accept_options' do
     it_should_behave_like 'an idempotent method'
 
     it 'adds methods to the object' do
-      expect(object.public_methods).to_not include(*new_options)
+      expect(object.public_methods(false)).to_not include(*new_options)
       subject
-      expect(object.public_methods).to include(*new_options)
+      expect(object.public_methods(false)).to include(*new_options)
     end
 
     it 'adds methods to the object that can set a value' do
@@ -42,33 +42,51 @@ describe Axiom::Types::Options, '#accept_options' do
         child
       end
 
+      it 'is idempotent when called on the child' do
+        subject
+        force_inherit_from_object
+        expect(child.accept_options(*new_options)).to be(child)
+      end
+
       it 'adds the method to the descendants' do
         force_inherit_from_object
-        expect(child.public_methods).to_not include(*new_options)
+        expect(child.public_methods(false)).to_not include(*new_options)
         subject
-        expect(child.public_methods).to include(*new_options)
+        expect(child.public_methods(false)).to include(*new_options)
       end
 
-      it 'adds methods to the descendant, when inherited, that can set a value' do
-        subject
-        force_inherit_from_object
-        child.primitive(::String)
-        expect(child.primitive).to be(::String)
+      context 'when inherited' do
+        before do
+          object.accept_options(:opt)
+          expect(object.opt(:default)).to be(object)
+          force_inherit_from_object
+        end
+
+        it 'sets the descendant defaults' do
+          expect(child.opt).to be(:default)
+        end
+
+        it 'adds methods to the descendant that can set a value' do
+          child.opt(:value)
+          expect(child.opt).to be(:value)
+        end
       end
 
-      it 'adds methods to the descendant, after inherited, that can set a value' do
-        subject
-        force_inherit_from_object
-        object.accept_options(:opt)
-        child.opt(:value)
-        expect(child.opt).to be(:value)
-      end
+      context 'after inherited' do
+        before do
+          force_inherit_from_object
+          object.accept_options(:opt)
+          expect(object.opt(:default)).to be(object)
+        end
 
-      it 'sets the descendant defaults' do
-        subject
-        object.primitive(::String)
-        force_inherit_from_object
-        expect(child.primitive).to be(::String)
+        it 'does not set the descendant defaults' do
+          expect(child.opt).to be_nil
+        end
+
+        it 'adds methods to the descendant that can set a value' do
+          child.opt(:value)
+          expect(child.opt).to be(:value)
+        end
       end
     end
 
@@ -77,48 +95,89 @@ describe Axiom::Types::Options, '#accept_options' do
         grand_child
       end
 
+      it 'is idempotent when called on the grand child' do
+        subject
+        force_inherit_from_child
+        expect(grand_child.accept_options(*new_options)).to be(grand_child)
+      end
+
       it 'adds the method to the descendants' do
         force_inherit_from_child
-        expect(grand_child.public_methods).to_not include(*new_options)
+        expect(grand_child.public_methods(false)).to_not include(*new_options)
         subject
-        expect(grand_child.public_methods).to include(*new_options)
+        expect(grand_child.public_methods(false)).to include(*new_options)
       end
 
-      it 'adds methods to the descendant, when inherited, that can set a value' do
-        subject
-        force_inherit_from_child
-        grand_child.primitive(::String)
-        expect(grand_child.primitive).to be(::String)
+      context 'when inherited' do
+        context 'from the object' do
+          before do
+            object.accept_options(:opt)
+            expect(object.opt(:default)).to be(object)
+            force_inherit_from_child
+          end
+
+          it 'sets the descendant defaults' do
+            expect(grand_child.opt).to be(:default)
+          end
+
+          it 'adds methods to the descendant that can set a value' do
+            grand_child.opt(:value)
+            expect(grand_child.opt).to be(:value)
+          end
+        end
+
+        context 'from the child' do
+          before do
+            child.accept_options(:opt)
+            expect(child.opt(:default)).to be(child)
+            force_inherit_from_child
+          end
+
+          it 'sets the descendant defaults' do
+            expect(grand_child.opt).to be(:default)
+          end
+
+          it 'adds methods to the descendant that can set a value' do
+            grand_child.opt(:value)
+            expect(grand_child.opt).to be(:value)
+          end
+        end
       end
 
-      it 'adds methods to the descendant from the object, after inherited, that can set a value' do
-        subject
-        force_inherit_from_child
-        object.accept_options(:opt)
-        grand_child.opt(:value)
-        expect(grand_child.opt).to be(:value)
-      end
+      context 'after inherited' do
+        context 'from the object' do
+          before do
+            force_inherit_from_child
+            object.accept_options(:opt)
+            expect(object.opt(:default)).to be(object)
+          end
 
-      it 'adds methods to the descendant from the child, after inherited, that can set a value' do
-        subject
-        force_inherit_from_child
-        child.accept_options(:opt)
-        grand_child.opt(:value)
-        expect(grand_child.opt).to be(:value)
-      end
+          it 'does not set the descendant defaults' do
+            expect(grand_child.opt).to be_nil
+          end
 
-      it 'sets the descendant defaults from the object' do
-        subject
-        object.primitive(::String)
-        force_inherit_from_child
-        expect(grand_child.primitive).to be(::String)
-      end
+          it 'adds methods to the descendant that can set a value' do
+            grand_child.opt(:value)
+            expect(grand_child.opt).to be(:value)
+          end
+        end
 
-      it 'sets the descendant defaults from the child' do
-        subject
-        child.primitive(::String)
-        force_inherit_from_child
-        expect(grand_child.primitive).to be(::String)
+        context 'from the child' do
+          before do
+            force_inherit_from_child
+            child.accept_options(:opt)
+            expect(child.opt(:default)).to be(child)
+          end
+
+          it 'sets the descendant defaults' do
+            expect(grand_child.opt).to be_nil
+          end
+
+          it 'adds methods to the descendant that can set a value' do
+            grand_child.opt(:value)
+            expect(grand_child.opt).to be(:value)
+          end
+        end
       end
     end
   end
