@@ -11,7 +11,7 @@ module Axiom
         #
         # Add #encoding DSL method to descendant and set the default to UTF-8.
         #
-        # @param [Class] descendant
+        # @param [Class<Axiom::Types::Type>] descendant
         #
         # @return [undefined]
         #
