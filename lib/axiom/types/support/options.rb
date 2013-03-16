@@ -4,38 +4,6 @@ module Axiom
     # A module that adds class and instance level options
     module Options
 
-      # Returns default options hash for a given attribute class
-      #
-      # @example
-      #   Axiom::Types::String.options
-      #   # => {:primitive => String}
-      #
-      # @return [Hash]
-      #   a hash of default option values
-      #
-      # @api public
-      def options
-        accepted_options.each_with_object({}) do |name, options|
-          ivar = "@#{name}"
-          next unless instance_variable_defined?(ivar)
-          options[name] = instance_variable_get(ivar)
-        end
-      end
-
-      # Returns an array of valid options
-      #
-      # @example
-      #   Axiom::Types::String.accepted_options
-      #   # => [:primitive, :accessor, :reader, :writer]
-      #
-      # @return [Array]
-      #   the array of valid option names
-      #
-      # @api public
-      def accepted_options
-        @accepted_options ||= []
-      end
-
       # Defines which options are valid for a given attribute class
       #
       # @example
@@ -55,19 +23,6 @@ module Axiom
 
     protected
 
-      # Sets default options
-      #
-      # @param [#each] new_options
-      #   options to be set
-      #
-      # @return [self]
-      #
-      # @api private
-      def set_options(new_options)
-        new_options.merge(options).each { |pair| public_send(*pair) }
-        self
-      end
-
       # Adds new options that an attribute class can accept
       #
       # @param [#to_ary] new_options
@@ -78,6 +33,19 @@ module Axiom
       # @api private
       def add_accepted_options(new_options)
         accepted_options.concat(new_options)
+        self
+      end
+
+      # Sets default options
+      #
+      # @param [#each] new_options
+      #   options to be set
+      #
+      # @return [self]
+      #
+      # @api private
+      def set_options(new_options)
+        new_options.merge(options).each { |pair| public_send(*pair) }
         self
       end
 
@@ -93,6 +61,38 @@ module Axiom
       def inherited(descendant)
         super
         descendant.add_accepted_options(accepted_options).set_options(options)
+      end
+
+      # Returns default options hash for a given attribute class
+      #
+      # @example
+      #   Axiom::Types::String.options
+      #   # => {:primitive => String}
+      #
+      # @return [Hash]
+      #   a hash of default option values
+      #
+      # @api private
+      def options
+        accepted_options.each_with_object({}) do |name, options|
+          ivar = "@#{name}"
+          next unless instance_variable_defined?(ivar)
+          options[name] = instance_variable_get(ivar)
+        end
+      end
+
+      # Returns an array of valid options
+      #
+      # @example
+      #   Axiom::Types::String.accepted_options
+      #   # => [:primitive, :accessor, :reader, :writer]
+      #
+      # @return [Array]
+      #   the array of valid option names
+      #
+      # @api private
+      def accepted_options
+        @accepted_options ||= []
       end
 
       # Adds a reader/writer method for the give option name
