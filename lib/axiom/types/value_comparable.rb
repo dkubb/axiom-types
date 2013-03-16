@@ -6,20 +6,40 @@ module Axiom
     # Add a minimum and maximum constraint to a type
     module ValueComparable
 
+      # Hook called when module is extended
+      #
+      # Add #minimum and #maximum DSL methods to descendant.
+      #
+      # @param [Class<Axiom::Types::Type>] descendant
+      #
+      # @return [undefined]
+      #
+      # @api private
       def self.extended(descendant)
+        super
         descendant.accept_options :minimum, :maximum
       end
 
+      # Finalize by setting up a value range constraint
+      #
+      # @return [Axiom::Types::ValueComparable]
+      #
+      # @api private
       def finalize
         return self if frozen?
-        value_between(IceNine.deep_freeze(minimum), IceNine.deep_freeze(maximum))
+        has_value_within_range
         super
       end
 
     private
 
-      def value_between(minium, maximum)
-        constraint { |object| object.between?(minium, maximum) }
+      # Add a constraint for a value within a range
+      #
+      # @return [undefined]
+      #
+      # @api private
+      def has_value_within_range
+        constraint { |object| object.between?(minimum, maximum) }
       end
 
     end # module ValueComparable
