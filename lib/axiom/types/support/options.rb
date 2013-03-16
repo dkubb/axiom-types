@@ -4,6 +4,9 @@ module Axiom
     # A module that adds class and instance level options
     module Options
 
+      # Raised when the method is already used
+      class ReservedMethodError < ArgumentError; end
+
       # Defines which options are valid for a given attribute class
       #
       # @example
@@ -16,8 +19,13 @@ module Axiom
       # @api public
       def accept_options(*new_options)
         add_accepted_options(new_options)
-        new_options.each { |option| define_option_method(option) }
-        descendants.each { |descendant| descendant.add_accepted_options(new_options) }
+        new_options.each do |option|
+          assert_method_available(option)
+          define_option_method(option)
+        end
+        #descendants.each do |descendant|
+        #  descendant.add_accepted_options(new_options)
+        #end
         self
       end
 
@@ -45,7 +53,7 @@ module Axiom
       #
       # @api private
       def set_options(new_options)
-        new_options.merge(options).each { |pair| public_send(*pair) }
+        new_options.each { |pair| public_send(*pair) }
         self
       end
 
@@ -75,9 +83,7 @@ module Axiom
       # @api private
       def options
         accepted_options.each_with_object({}) do |name, options|
-          ivar = "@#{name}"
-          next unless instance_variable_defined?(ivar)
-          options[name] = instance_variable_get(ivar)
+          options[name] = public_send(name)
         end
       end
 
@@ -93,6 +99,23 @@ module Axiom
       # @api private
       def accepted_options
         @accepted_options ||= []
+      end
+
+      # Assert that the option is not already defined
+      #
+      # @param [Symbol] name
+      #
+      # @return [undefined]
+      #
+      # @raise [ReservedMethodError]
+      #   raised when the method is already defined
+      #
+      # @api private
+      def assert_method_available(name)
+        if respond_to?(name)
+          raise ReservedMethodError,
+            "method named `#{name.inspect}` is already defined"
+        end
       end
 
       # Adds a reader/writer method for the give option name
