@@ -2,7 +2,7 @@
 AbcMetricMethodCheck:            { score: 6.0 }
 AssignmentInConditionalCheck:    { }
 CaseMissingElseCheck:            { }
-ClassLineCountCheck:             { line_count: 107 }
+ClassLineCountCheck:             { line_count: 129 }
 ClassNameCheck:                  { pattern: !ruby/regexp '/\A(?:[A-Z]+|[A-Z][a-z](?:[A-Z]?[a-z])+)\z/' }
 ClassVariableCheck:              { }
 CyclomaticComplexityBlockCheck:  { complexity: 3 }
