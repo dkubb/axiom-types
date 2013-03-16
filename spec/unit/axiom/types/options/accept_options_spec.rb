@@ -23,7 +23,7 @@ describe Axiom::Types::Options, '#accept_options' do
     let(:new_options) { [ :primitive, :coerce_method ] }
 
     it_should_behave_like 'a command method'
-#    it_should_behave_like 'an idempotent method'
+    it_should_behave_like 'an idempotent method'
 
     it 'adds methods to the object' do
       expect(object.public_methods).to_not include(*new_options)
