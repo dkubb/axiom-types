@@ -15,7 +15,7 @@ describe Axiom::Types::Encodable, '#finalize', :if => RUBY_VERSION >= '1.9' do
 
     its(:constraint) { should be_frozen }
 
-    Encoding.list.each do |encoding|
+    defined?(::Encoding) && Encoding.list.each do |encoding|
       if encoding.ascii_compatible?
         it "adds a constraint that returns true for #{encoding} encoding" do
           should include(''.force_encoding(encoding))
@@ -40,7 +40,7 @@ describe Axiom::Types::Encodable, '#finalize', :if => RUBY_VERSION >= '1.9' do
 
     its(:constraint) { should be_frozen }
 
-    Encoding.list.each do |encoding|
+    defined?(::Encoding) && Encoding.list.each do |encoding|
       if encoding.equal?(Encoding::UTF_16BE)
         it "adds a constraint that returns true for #{encoding} encoding" do
           should include(''.force_encoding(encoding))
