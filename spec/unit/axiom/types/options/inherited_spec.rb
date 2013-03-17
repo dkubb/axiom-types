@@ -26,7 +26,7 @@ describe Axiom::Types::Options, '#inherited' do
 
   it 'adds the accepted option to the descendant' do
     subject
-    expect(descendant.public_methods(false)).to include(:opt)
+    expect(descendant.public_methods(false).map(&:to_sym)).to include(:opt)
   end
 
   it 'sets the default value for the descendant' do
