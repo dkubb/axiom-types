@@ -5,15 +5,8 @@ require 'spec_helper'
 describe Axiom::Types::Options, '#accept_options' do
   subject { object.accept_options(*new_options) }
 
-  let(:object) do
-    Class.new do
-      extend Options, DescendantsTracker
-    end
-  end
-
-  let(:child) do
-    Class.new(object)
-  end
+  let(:object)     { Class.new { extend Options, DescendantsTracker } }
+  let(:descendant) { Class.new(object)                                }
 
   context 'with valid options' do
     let(:new_options) { [ :primitive, :coerce_method ] }
@@ -29,62 +22,64 @@ describe Axiom::Types::Options, '#accept_options' do
 
     it 'adds methods to the object that can set a value' do
       subject
-      object.primitive(::String)
-      expect(object.primitive).to be(::String)
+      object.primitive(::Symbol)
+      expect(object.primitive).to be(::Symbol)
     end
 
-    context 'with the child class' do
+    context 'with the descendant class' do
+      let(:default) { ::String }
+
       def force_inherit
-        child
+        descendant
       end
 
-      context 'when inherited' do
+      context 'option added before inherited' do
         before do
-          object.accept_options(:opt)
-          expect(object.opt(:default)).to be(object)
+          subject
+          expect(object.primitive(default)).to be(object)
           force_inherit
         end
 
         it 'is idempotent' do
-          expect(child.accept_options(:opt)).to be(child)
+          expect(descendant.accept_options(:primitive)).to be(descendant)
         end
 
         it 'adds the method to the descendants' do
-          expect(child.public_methods(false)).to include(:opt)
+          expect(descendant.public_methods(false)).to include(:primitive)
         end
 
         it 'sets the descendant defaults' do
-          expect(child.opt).to be(:default)
+          expect(descendant.primitive).to be(default)
         end
 
         it 'adds methods to the descendant that can set a value' do
-          child.opt(:value)
-          expect(child.opt).to be(:value)
+          descendant.primitive(::Symbol)
+          expect(descendant.primitive).to be(::Symbol)
         end
       end
 
-      context 'after inherited' do
+      context 'option added after inherited' do
         before do
           force_inherit
-          object.accept_options(:opt)
-          expect(object.opt(:default)).to be(object)
+          subject
+          expect(object.primitive(default)).to be(object)
         end
 
         it 'is idempotent' do
-          expect(child.accept_options(:opt)).to be(child)
+          expect(descendant.accept_options(:primitive)).to be(descendant)
         end
 
         it 'adds the method to the descendants' do
-          expect(child.public_methods(false)).to include(:opt)
+          expect(descendant.public_methods(false)).to include(:primitive)
         end
 
         it 'does not set the descendant defaults' do
-          expect(child.opt).to be_nil
+          expect(descendant.primitive).to be_nil
         end
 
         it 'adds methods to the descendant that can set a value' do
-          child.opt(:value)
-          expect(child.opt).to be(:value)
+          descendant.primitive(::Symbol)
+          expect(descendant.primitive).to be(::Symbol)
         end
       end
     end
