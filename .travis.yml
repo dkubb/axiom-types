@@ -19,6 +19,4 @@ notifications:
     - dan.kubb@gmail.com
 matrix:
   allow_failures:
-    - rvm: 1.9.3         # mutant coverage needed
-    - rvm: rbx-19mode    # mutant coverage needed
     - rvm: jruby-head    # yard parser fails
