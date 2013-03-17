@@ -4,9 +4,10 @@ describe Axiom::Types::Object, '.finalize' do
   subject { object.finalize }
 
   let(:object) do
-    Class.new(described_class) do
-      primitive ::String
-    end
+    # Class.new { ... } does not work with this on 1.8.7
+    object = Class.new(described_class)
+    object.primitive(::String)
+    object
   end
 
   it_should_behave_like 'a command method'
