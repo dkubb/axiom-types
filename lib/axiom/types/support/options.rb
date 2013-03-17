@@ -39,7 +39,7 @@ module Axiom
       def add_accepted_option(new_option)
         accepted_options << new_option
         descendants.each do |descendant|
-          descendant.public_send(__method__, new_option)
+          descendant.send(__method__, new_option)
         end
         self
       end
