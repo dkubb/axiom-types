@@ -20,19 +20,4 @@ describe Axiom::Types::Type, '.include?' do
 
     it { should be(false) }
   end
-
-  context 'when the constraint does not return a boolean' do
-    let(:object) do
-      Class.new(described_class) do
-        constraint(proc { nil })
-      end
-    end
-
-    specify 'an exception is raised' do
-      expect { subject }.to raise_error(
-        TypeError,
-        'constraint must return true or false, but was nil'
-      )
-    end
-  end
 end

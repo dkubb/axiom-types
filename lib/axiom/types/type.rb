@@ -64,12 +64,7 @@ module Axiom
       #
       # @api public
       def self.include?(object)
-        included = @constraint.call(object)
-        if included != true && included != false
-          raise TypeError,
-            "constraint must return true or false, but was #{included.inspect}"
-        end
-        included
+        @constraint.call(object)
       end
 
       # Add a constraint to the type
