@@ -41,7 +41,7 @@ module Axiom
       #
       # @api private
       def self.finalize
-        IceNine.deep_freeze(@constraint)
+        IceNine.deep_freeze(constraint)
         freeze
       end
 
@@ -64,7 +64,7 @@ module Axiom
       #
       # @api public
       def self.include?(object)
-        @constraint.call(object)
+        constraint.call(object)
       end
 
       # Add a constraint to the type
@@ -121,7 +121,7 @@ module Axiom
       #
       # @api private
       def self.add_constraint(constraint)
-        current     = @constraint
+        current     = self.constraint
         @constraint = if current
           lambda { |object| constraint.call(object) && current.call(object) }
         else
