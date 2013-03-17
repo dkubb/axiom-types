@@ -1,11 +1,19 @@
+[![Gem Version](https://badge.fury.io/rb/axiom-types.png)][gem]
+[![Build Status](https://secure.travis-ci.org/dkubb/axiom-types.png?branch=master)][travis]
+[![Dependency Status](https://gemnasium.com/dkubb/axiom-types.png)][gemnasium]
+[![Code Climate](https://codeclimate.com/github/dkubb/axiom-types.png)][codeclimate]
+[![Coverage Status](https://coveralls.io/repos/dkubb/axiom-types/badge.png?branch=master)][coveralls]
+
+[gem]: https://rubygems.org/gems/axiom-types
+[travis]: https://travis-ci.org/dkubb/axiom-types
+[gemnasium]: https://gemnasium.com/dkubb/axiom-types
+[codeclimate]: https://codeclimate.com/github/dkubb/axiom-types
+[coveralls]: https://coveralls.io/r/dkubb/axiom-types
+
 axiom-types
 ===========
 
 Define types with optional constraints for use within axiom and other libraries.
-
-[![Build Status](https://secure.travis-ci.org/dkubb/axiom-types.png)](https://travis-ci.org/dkubb/axiom-types)
-[![Dependency Status](https://gemnasium.com/dkubb/axiom-types.png)](https://gemnasium.com/dkubb/axiom-types)
-[![Code Climate](https://codeclimate.com/github/dkubb/axiom-types.png)](https://codeclimate.com/github/dkubb/axiom-types)
 
 Examples
 --------
