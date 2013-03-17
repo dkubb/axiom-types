@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Encoding
   UTF_8    = new
   UTF_16BE = new
