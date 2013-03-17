@@ -16,7 +16,10 @@ rvm:
   - rbx-19mode
 notifications:
   email:
-    - dan.kubb@gmail.com
+    recipients:
+      - dan.kubb@gmail.com
+    on_success: never
+    on_failure: change
 matrix:
   include:
     - rvm: jruby-18mode
