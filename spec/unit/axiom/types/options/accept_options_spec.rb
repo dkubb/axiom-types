@@ -34,28 +34,23 @@ describe Axiom::Types::Options, '#accept_options' do
     end
 
     context 'with the child class' do
-      def force_inherit_from_object
+      def force_inherit
         child
-      end
-
-      it 'is idempotent when called on the child' do
-        subject
-        force_inherit_from_object
-        expect(child.accept_options(*new_options)).to be(child)
-      end
-
-      it 'adds the method to the descendants' do
-        force_inherit_from_object
-        expect(child.public_methods(false)).to_not include(*new_options)
-        subject
-        expect(child.public_methods(false)).to include(*new_options)
       end
 
       context 'when inherited' do
         before do
           object.accept_options(:opt)
           expect(object.opt(:default)).to be(object)
-          force_inherit_from_object
+          force_inherit
+        end
+
+        it 'is idempotent' do
+          expect(child.accept_options(:opt)).to be(child)
+        end
+
+        it 'adds the method to the descendants' do
+          expect(child.public_methods(false)).to include(:opt)
         end
 
         it 'sets the descendant defaults' do
@@ -70,9 +65,17 @@ describe Axiom::Types::Options, '#accept_options' do
 
       context 'after inherited' do
         before do
-          force_inherit_from_object
+          force_inherit
           object.accept_options(:opt)
           expect(object.opt(:default)).to be(object)
+        end
+
+        it 'is idempotent' do
+          expect(child.accept_options(:opt)).to be(child)
+        end
+
+        it 'adds the method to the descendants' do
+          expect(child.public_methods(false)).to include(:opt)
         end
 
         it 'does not set the descendant defaults' do
