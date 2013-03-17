@@ -18,5 +18,12 @@ notifications:
   email:
     - dan.kubb@gmail.com
 matrix:
+  include:
+    - rvm: jruby-18mode
+      env: JRUBY_OPTS="$JRUBY_OPTS --debug"
+    - rvm: jruby-19mode
+      env: JRUBY_OPTS="$JRUBY_OPTS --debug"
+    - rvm: jruby-head
+      env: JRUBY_OPTS="$JRUBY_OPTS --debug"
   allow_failures:
-    - rvm: jruby-head    # yard parser fails
+    - rvm: jruby-head  # yard parser fails
