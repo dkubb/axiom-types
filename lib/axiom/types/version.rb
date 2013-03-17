@@ -2,6 +2,9 @@
 
 module Axiom
   module Types
-    VERSION = '0.0.1'
+
+    # Gem version
+    VERSION = '0.0.1'.freeze
+
   end # module Types
 end # module Axiom

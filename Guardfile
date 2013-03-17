@@ -2,6 +2,7 @@
 
 guard :bundler do
   watch('Gemfile')
+  watch('axiom-types.gemspec')
 end
 
 guard :rspec, :keep_failed => false do
