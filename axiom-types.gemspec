@@ -3,13 +3,14 @@
 require File.expand_path('../lib/axiom/types/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.name             = 'axiom-types'
-  gem.version          = Axiom::Types::VERSION.dup
-  gem.authors          = ['Dan Kubb']
-  gem.email            = 'dan.kubb@gmail.com'
-  gem.description      = 'Abstract types for logic programming'
-  gem.summary          = gem.description
-  gem.homepage         = 'https://github.com/dkubb/axiom-types'
+  gem.name        = 'axiom-types'
+  gem.version     = Axiom::Types::VERSION.dup
+  gem.authors     = ['Dan Kubb']
+  gem.email       = 'dan.kubb@gmail.com'
+  gem.description = 'Abstract types for logic programming'
+  gem.summary     = 'Define types with optional constraints for use within axiom and other libraries.'
+  gem.homepage    = 'https://github.com/dkubb/axiom-types'
+  gem.licenses    = %w[MIT]
 
   gem.require_paths    = %w[lib]
   gem.files            = `git ls-files`.split($/)
