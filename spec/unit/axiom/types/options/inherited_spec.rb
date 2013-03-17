@@ -6,8 +6,8 @@ describe Axiom::Types::Options, '#inherited' do
   let(:object) do
     Class.new(ancestor) do
       extend Options, DescendantsTracker
-      accept_options :opt
-      opt :default
+      accept_options :primitive, :coerce_method
+      primitive ::String
     end
   end
 
@@ -26,11 +26,11 @@ describe Axiom::Types::Options, '#inherited' do
 
   it 'adds the accepted option to the descendant' do
     subject
-    expect(descendant.public_methods(false).map(&:to_sym)).to include(:opt)
+    expect(descendant).to respond_to(:primitive, :coerce_method)
   end
 
   it 'sets the default value for the descendant' do
     subject
-    expect(descendant.opt).to be(:default)
+    expect(descendant.primitive).to be(::String)
   end
 end

@@ -15,9 +15,9 @@ describe Axiom::Types::Options, '#accept_options' do
     it_should_behave_like 'an idempotent method'
 
     it 'adds methods to the object' do
-      expect(object.public_methods(false).map(&:to_sym)).to_not include(*new_options)
+      expect(object).to_not respond_to(*new_options)
       subject
-      expect(object.public_methods(false).map(&:to_sym)).to include(*new_options)
+      expect(object).to respond_to(*new_options)
     end
 
     it 'adds methods to the object that can set a value' do
@@ -45,7 +45,7 @@ describe Axiom::Types::Options, '#accept_options' do
         end
 
         it 'adds the method to the descendants' do
-          expect(descendant.public_methods(false).map(&:to_sym)).to include(:primitive)
+          expect(descendant).to respond_to(*new_options)
         end
 
         it 'sets the descendant defaults' do
@@ -70,7 +70,7 @@ describe Axiom::Types::Options, '#accept_options' do
         end
 
         it 'adds the method to the descendants' do
-          expect(descendant.public_methods(false).map(&:to_sym)).to include(:primitive)
+          expect(descendant).to respond_to(*new_options)
         end
 
         it 'does not set the descendant defaults' do
