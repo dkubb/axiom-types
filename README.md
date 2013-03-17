@@ -5,7 +5,7 @@ Define types with optional constraints for use within axiom and other libraries.
 
 [![Build Status](https://secure.travis-ci.org/dkubb/axiom-types.png)](https://travis-ci.org/dkubb/axiom-types)
 [![Dependency Status](https://gemnasium.com/dkubb/axiom-types.png)](https://gemnasium.com/dkubb/axiom-types)
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/dkubb/axiom-types)
+[![Code Climate](https://codeclimate.com/github/dkubb/axiom-types.png)](https://codeclimate.com/github/dkubb/axiom-types)
 
 Examples
 --------
