@@ -14,7 +14,7 @@ module Axiom
 
       # Finalize by setting up constraints for the key and value
       #
-      # @return [Axiom::Types::Object]
+      # @return [Class<Axiom::Types::Hash>]
       #
       # @api private
       def self.finalize

@@ -11,7 +11,7 @@ module Axiom
 
       # Finalize by setting up a primitive constraint
       #
-      # @return [Axiom::Types::Object]
+      # @return [Class<Axiom::Types::Object>]
       #
       # @api private
       def self.finalize

@@ -37,7 +37,7 @@ module Axiom
 
       # Finalize by deep freezing
       #
-      # @return [Axiom::Types::Type]
+      # @return [Class<Axiom::Types::Type>]
       #
       # @api private
       def self.finalize
@@ -89,7 +89,7 @@ module Axiom
       # @yieldreturn [Boolean]
       #   true if the object matches the type constraint
       #
-      # @return [self]
+      # @return [Class<Axiom::Types::Type>]
       #
       # @api public
       def self.constraint(constraint = Undefined, &block)

@@ -25,7 +25,7 @@ module Axiom
     # @example
     #   Axiom::Types.finalize  # => Axiom::Types
     #
-    # @return [Axiom::Types]
+    # @return [Module<Axiom::Types>]
     #
     # @api public
     def self.finalize
