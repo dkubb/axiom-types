@@ -4,7 +4,7 @@ module Axiom
   module Types
 
     # Represents a set type
-    class Set < Object
+    class Set < Collection
       primitive       ::Set
       coercion_method :to_set
 

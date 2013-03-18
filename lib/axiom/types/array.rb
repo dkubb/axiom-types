@@ -4,7 +4,7 @@ module Axiom
   module Types
 
     # Represents an array type
-    class Array < Object
+    class Array < Collection
       primitive       ::Array
       coercion_method :to_array
 

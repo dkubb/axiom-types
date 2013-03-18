@@ -46,6 +46,7 @@ require 'axiom/types/type'
 
 require 'axiom/types/object'
 
+require 'axiom/types/collection'
 require 'axiom/types/numeric'
 
 require 'axiom/types/array'

@@ -48,7 +48,8 @@ UncommunicativeModuleName:
 NestedIterators:
   ignore_iterators: []
   exclude:
-    - Axiom::Types::Hash#self.matches
+    - Axiom::Types::Hash#self.matches_key_and_value_types
+    - Axiom::Types::Collection#self.matches_member_type
   enabled: true
   max_allowed_nesting: 1
 LongMethod:
