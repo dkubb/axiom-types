@@ -46,6 +46,18 @@ module Axiom
         self
       end
 
+      # Set the option if it is not already set
+      #
+      # @param [Symbol] option
+      # @param [Object] value
+      #
+      # @return [self]
+      #
+      # @api private
+      def set_option(option, value)
+        public_send(option, value) unless public_send(option)
+      end
+
     private
 
       # Adds descendant to descendants array and inherits default options
@@ -58,7 +70,7 @@ module Axiom
       def inherited(descendant)
         super
         options.each do |option, value|
-          descendant.add_accepted_option(option).public_send(option, value)
+          descendant.add_accepted_option(option).set_option(option, value)
         end
       end
 
