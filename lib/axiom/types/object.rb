@@ -23,7 +23,7 @@ module Axiom
       #
       # @api public
       def self.infer(object)
-        super || (self if primitive_class?(object))
+        super || infer_from_primitive_class(object)
       end
 
       # Finalize by setting up a primitive constraint
@@ -37,15 +37,18 @@ module Axiom
         super
       end
 
-      # Test if the object is the correct primitive class
+      # Infer the type if the primitive class matches
       #
       # @param [Object] object
       #
-      # @return [Boolean]
+      # @return [Class<Axiom::Types::Object>]
+      #   returned if the primitive class matches
+      # @return [nil]
+      #   returned if the primitive class does not match
       #
       # @api private
-      def self.primitive_class?(object)
-        primitive.singleton_class === object
+      def self.infer_from_primitive_class(object)
+        self if primitive.singleton_class === object
       end
 
       # Add a constraint for the primitive
@@ -57,7 +60,7 @@ module Axiom
         constraint(&primitive.method(:===))
       end
 
-      private_class_method :primitive_class?, :inherits_from_primitive
+      private_class_method :infer_from_primitive_class, :inherits_from_primitive
 
     end # class Object
   end # module Types

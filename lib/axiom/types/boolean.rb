@@ -9,19 +9,22 @@ module Axiom
 
       includes true, false
 
-      # Test if the object is the correct primitive class
+      # Infer the type if the primitive class matches
       #
       # @param [Object] object
       #
-      # @return [Boolean]
+      # @return [Class<Axiom::Types::Boolean>]
+      #   returned if the primitive class matches
+      # @return [nil]
+      #   returned if the primitive class does not match
       #
       # @api private
-      def self.primitive_class?(object)
-        TrueClass.singleton_class  === object ||
-        FalseClass.singleton_class === object
+      def self.infer_from_primitive_class(object)
+        self if TrueClass.singleton_class  === object ||
+                FalseClass.singleton_class === object
       end
 
-      private_class_method :primitive_class?
+      private_class_method :infer_from_primitive_class
 
     end # class Boolean
   end # module Types
