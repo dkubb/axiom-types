@@ -20,6 +20,30 @@ module Axiom
     # A false proposition
     Contradiction = proc { false }.freeze
 
+    # Cache the type inference lookup by object
+    @inference_cache = Hash.new do |cache, object|
+      type = nil
+      Type.descendants.each do |descendant|
+        break if type = descendant.infer(object)
+      end
+      cache[object] = type
+    end
+
+    # Infer the type of an object
+    #
+    # @example
+    #   Axiom::Types.infer(Integer)  # => Axiom::Types::Integer
+    #
+    # @param [Object] object
+    #   object to infer the type of
+    #
+    # @return [Class<Axiom::Types::Type>]
+    #
+    # @api public
+    def self.infer(object)
+      @inference_cache[object]
+    end
+
     # Finalize Axiom::Types::Type subclasses
     #
     # @example
