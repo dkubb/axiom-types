@@ -48,7 +48,7 @@ module Axiom
       #
       # @api private
       def self.infer_from_primitive_class(object)
-        self if primitive.singleton_class === object
+        self if object.ancestors.include?(primitive)
       end
 
       # Add a constraint for the primitive
