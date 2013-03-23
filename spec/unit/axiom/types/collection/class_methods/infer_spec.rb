@@ -5,6 +5,10 @@ require 'spec_helper'
 describe Axiom::Types::Collection, '.infer' do
   subject { object.infer(arg) }
 
+  before do
+    object.finalize
+  end
+
   context 'with a base class' do
     let(:object) do
       Class.new(described_class) do

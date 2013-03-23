@@ -7,6 +7,10 @@ describe Axiom::Types, '.infer' do
 
   let(:object) { described_class }
 
+  before do
+    object.finalize
+  end
+
   Axiom::Types::Type.descendants.each do |descendant|
     context "when the type is #{descendant}" do
       let(:type) { descendant }

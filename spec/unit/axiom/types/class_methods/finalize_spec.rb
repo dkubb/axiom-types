@@ -5,14 +5,8 @@ require 'spec_helper'
 describe Axiom::Types, '.finalize' do
   subject { object.finalize }
 
-  let(:object)      { described_class                   }
-  let(:descendants) { [ descendant ]                    }
-  let(:descendant)  { mock('descendant').as_null_object }
-
-  before do
-    object::Type.should_receive(:descendants).at_least(:once).
-      and_return(descendants)
-  end
+  let(:object)      { described_class               }
+  let(:descendant)  { Class.new(Axiom::Types::Type) }
 
   it_should_behave_like 'a command method'
 

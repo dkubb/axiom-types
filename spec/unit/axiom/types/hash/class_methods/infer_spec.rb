@@ -5,6 +5,10 @@ require 'spec_helper'
 describe Axiom::Types::Hash, '.infer' do
   subject { object.infer(arg) }
 
+  before do
+    object.finalize
+  end
+
   context 'with Axiom::Types::Hash' do
     let(:object) { described_class }
 

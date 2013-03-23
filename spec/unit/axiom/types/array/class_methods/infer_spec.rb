@@ -5,6 +5,10 @@ require 'spec_helper'
 describe Axiom::Types::Array, '.infer' do
   subject { object.infer(arg) }
 
+  before do
+    object.finalize
+  end
+
   context 'with Axiom::Types::Array' do
     let(:object) { described_class }
 

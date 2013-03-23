@@ -5,6 +5,10 @@ require 'spec_helper'
 describe Axiom::Types::Type, '.new' do
   let(:undefined) { Axiom::Types::Undefined }
 
+  before do
+    object.finalize
+  end
+
   context 'with no arguments' do
     subject { object.new }
 
