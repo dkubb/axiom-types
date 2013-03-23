@@ -41,6 +41,6 @@ RSpec.configure do |config|
   # Reset the Type descendants
   config.after do
     Axiom::Types::Type.descendants.replace(@original_descendants)
+    Axiom::Types.instance_variable_get(:@inference_cache).clear
   end
-
 end
