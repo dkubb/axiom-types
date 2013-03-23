@@ -10,7 +10,8 @@ describe Axiom::Types, '.finalize' do
   let(:descendant)  { mock('descendant').as_null_object }
 
   before do
-    object::Type.should_receive(:descendants).and_return(descendants)
+    object::Type.should_receive(:descendants).at_least(:once).
+      and_return(descendants)
   end
 
   it_should_behave_like 'a command method'

@@ -32,4 +32,15 @@ RSpec.configure do |config|
   config.expect_with :rspec do |expect_with|
     expect_with.syntax = :expect
   end
+
+  # Record the original Type descendants
+  config.before do
+    @original_descendants = Axiom::Types::Type.descendants.dup
+  end
+
+  # Reset the Type descendants
+  config.after do
+    Axiom::Types::Type.descendants.replace(@original_descendants)
+  end
+
 end
