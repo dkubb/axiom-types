@@ -10,6 +10,21 @@ module Axiom
       accept_options :constraint
       constraint Tautology
 
+      # Infer the type of the object
+      #
+      # @example
+      #  type = Axiom::Types::Type.infer(Axiom::Types::Integer)
+      #  # => Axiom::Types::Integer
+      #
+      # @param [Object] object
+      #
+      # @return [Class<Axiom::Types::Type>]
+      #
+      # @api public
+      def self.infer(object)
+        self if equal?(object)
+      end
+
       # Instantiate a new Axiom::Types::Type subclass
       #
       # @example
