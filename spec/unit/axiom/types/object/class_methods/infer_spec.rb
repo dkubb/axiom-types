@@ -43,4 +43,10 @@ describe Axiom::Types::Object, '.infer' do
       end
     end
   end
+
+  context 'when the argument is nil' do
+    let(:arg) { nil }
+
+    it { should be_nil }
+  end
 end
