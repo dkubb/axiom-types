@@ -10,6 +10,45 @@ module Axiom
 
       member_type Object
 
+      # Infer the type of the object
+      #
+      # @example with a type
+      #   Axiom::Types::Array.infer(Axiom::Types::Array)
+      #   # => Axiom::Types::Array
+      #
+      # @example with a primitive class
+      #   Axiom::Types::Collection.infer(::Array)
+      #   # => Axiom::Types::Array
+      #
+      # @example with a primitive instance
+      #   Axiom::Types::Array.infer(Array[])
+      #   # => Axiom::Types::Array
+      #
+      # @example with a primitive instance and a member type
+      #   Axiom::Types::Collection.infer(Array[Axiom::Types::String])
+      #   # => Axiom::Types::Array subclass w/String member type
+      #
+      # @example with a primitive instance and a member primitive
+      #   Axiom::Types::Collection.infer(Array[String])
+      #   # => Axiom::Types::Array subclass w/String member type
+      #
+      # @param [Object] object
+      #
+      # @return [Class<Axiom::Types::Collection>]
+      #   returned if the type matches
+      # @return [nil]
+      #   returned if the type does not match
+      #
+      # @api public
+      def self.infer(object)
+        case object
+        when primitive
+          infer_from_primitive_instance(object)
+        else
+          super
+        end
+      end
+
       # Finalize by setting up constraints for the member
       #
       # @return [Class<Axiom::Types::Collection>]
@@ -20,6 +59,59 @@ module Axiom
         member_type.finalize
         matches_member_type
         super
+      end
+
+      # Infer the type from a primitive instance
+      #
+      # @param [Object] object
+      #
+      # @return [Class<Axiom::Types::Collection>]
+      #   returned if the primitive instance matches
+      # @return [nil]
+      #   returned if the primitive instance does not match
+      #
+      # @api private
+      def self.infer_from_primitive_instance(object)
+        member      = object.first
+        member_type = Types.infer(member) || Object
+        infer_from(member_type) || new_from(member_type)
+      end
+
+      # Infer the type from the member_type
+      #
+      # @param [Class<Axiom::Types::Object>] member_type
+      #
+      # @return [Class<Axiom::Types::Collection>]
+      #   returned if the member_type matches
+      # @return [nil]
+      #   returned if the member_type does not match
+      #
+      # @api private
+      def self.infer_from(member_type)
+        self if self.member_type.equal?(member_type)
+      end
+
+      # Instantiate a new type from a base type
+      #
+      # @param [Class<Axiom::Types::Object>] member_type
+      #
+      # @return [Class<Axiom::Types::Collection>]
+      #   returned if a base type
+      # @return [nil]
+      #   returned if not a base type
+      #
+      # @api private
+      def self.new_from(member_type)
+        new { member_type(member_type) } if base?
+      end
+
+      # Test if the type is a base type
+      #
+      # @return [Boolean]
+      #
+      # @api private
+      def self.base?
+        # noop
       end
 
       # Add a constraints for the member
@@ -33,7 +125,8 @@ module Axiom
         end
       end
 
-      private_class_method :matches_member_type
+      private_class_method :infer_from_primitive_instance, :infer_from,
+        :new_from, :base?, :matches_member_type
 
     end # class Collection
   end # module Types
