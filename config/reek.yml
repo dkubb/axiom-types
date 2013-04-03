@@ -1,101 +1,107 @@
 ---
-UncommunicativeParameterName:
-  accept: []
-  exclude: []
+Attribute:
   enabled: true
-  reject:
-  - !ruby/regexp /^.$/
-  - !ruby/regexp /[0-9]$/
-  - !ruby/regexp /[A-Z]/
-LargeClass:
-  max_methods: 0
   exclude: []
+BooleanParameter:
   enabled: true
-  max_instance_variables: 1
-UncommunicativeMethodName:
-  accept: []
   exclude: []
+ClassVariable:
   enabled: true
-  reject:
-  - !ruby/regexp /^[a-z]$/
-  - !ruby/regexp /[0-9]$/
-  - !ruby/regexp /[A-Z]/
-LongParameterList:
-  max_params: 2
   exclude: []
+ControlParameter:
   enabled: true
-  overrides: {}
+  exclude: []
+DataClump:
+  enabled: true
+  exclude: []
+  max_copies: 0
+  min_clump_size: 2
+DuplicateMethodCall:
+  enabled: true
+  exclude: []
+  max_calls: 1
+  allow_calls: []
 FeatureEnvy:
+  enabled: true
   exclude:
     - Axiom::Types::Encodable#has_encoding
-  enabled: true
-ClassVariable:
-  exclude: []
-  enabled: true
-BooleanParameter:
-  exclude: []
-  enabled: true
 IrresponsibleModule:
-  exclude: []
   enabled: true
-UncommunicativeModuleName:
-  accept: []
   exclude: []
+LongParameterList:
   enabled: true
-  reject:
-  - !ruby/regexp /^.$/
-  - !ruby/regexp /[0-9]$/
+  exclude: []
+  max_params: 2
+  overrides:
+    initialize:
+      max_params: 3
+LongYieldList:
+  enabled: true
+  exclude: []
+  max_params: 2
 NestedIterators:
-  ignore_iterators: []
+  enabled: true
   exclude:
     - Axiom::Types::Hash#self.matches_key_and_value_types
     - Axiom::Types::Collection#self.matches_member_type
-  enabled: true
   max_allowed_nesting: 1
-LongMethod:
-  max_statements: 5
-  exclude: []
-  enabled: true
-Duplication:
-  allow_calls: []
-  exclude: []
-  enabled: true
-  max_calls: 1
-UtilityFunction:
-  max_helper_calls: 0
-  exclude: []
-  enabled: true
-Attribute:
-  exclude: []
-  enabled: false
-UncommunicativeVariableName:
-  accept: []
-  exclude: []
-  enabled: true
-  reject:
-  - !ruby/regexp /^.$/
-  - !ruby/regexp /[0-9]$/
-  - !ruby/regexp /[A-Z]/
-SimulatedPolymorphism:
-  exclude: []
-  enabled: true
-  max_ifs: 1
-DataClump:
-  exclude: []
-  enabled: true
-  max_copies: 0
-  min_clump_size: 2
-ControlCouple:
-  exclude: []
-  enabled: true
-LongYieldList:
-  max_params: 0
-  exclude: []
-  enabled: true
-UnusedParameters:
-  enabled: true
-  exclude: []
+  ignore_iterators: []
 NilCheck:
   enabled: true
   exclude:
     - Axiom::Types::Type#self.constraint
+RepeatedConditional:
+  enabled: true
+  exclude: []
+  max_ifs: 1
+TooManyInstanceVariables:
+  enabled: true
+  exclude: []
+  max_instance_variables: 1
+TooManyMethods:
+  enabled: true
+  exclude: []
+  max_methods: 0
+TooManyStatements:
+  enabled: true
+  exclude:
+    - each
+  max_statements: 5
+UncommunicativeMethodName:
+  enabled: true
+  exclude: []
+  reject:
+    - !ruby/regexp /^[a-z]$/
+    - !ruby/regexp /[0-9]$/
+    - !ruby/regexp /[A-Z]/
+  accept: []
+UncommunicativeModuleName:
+  enabled: true
+  exclude: []
+  reject:
+    - !ruby/regexp /^.$/
+    - !ruby/regexp /[0-9]$/
+  accept: []
+UncommunicativeParameterName:
+  enabled: true
+  exclude: []
+  reject:
+    - !ruby/regexp /^.$/
+    - !ruby/regexp /[0-9]$/
+    - !ruby/regexp /[A-Z]/
+  accept: []
+UncommunicativeVariableName:
+  enabled: true
+  exclude: []
+  reject:
+    - !ruby/regexp /^.$/
+    - !ruby/regexp /[0-9]$/
+    - !ruby/regexp /[A-Z]/
+  accept: []
+UnusedParameters:
+  enabled: true
+  exclude: []
+UtilityFunction:
+  enabled: true
+  exclude: []
+  max_helper_calls: 0
