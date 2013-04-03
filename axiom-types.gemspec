@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
 
   gem.require_paths    = %w[lib]
   gem.files            = `git ls-files`.split($/)
-  gem.test_files       = `git ls-files spec/{unit,integration}`.split($/)
+  gem.test_files       = `git ls-files -- spec/unit`.split($/)
   gem.extra_rdoc_files = %w[LICENSE README.md TODO]
 
   gem.add_runtime_dependency('backports',           '~> 3.1', '>= 3.1.1')
