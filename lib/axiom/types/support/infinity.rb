@@ -19,12 +19,9 @@ module Axiom
       # @api private
       def self.<=>(other)
         case other
-        when ::BigDecimal
-          1
-        when number
-          0
-        when ::Numeric, inverse.singleton_class
-          1
+        when ::BigDecimal                       then 1
+        when number                             then 0
+        when ::Numeric, inverse.singleton_class then 1
         end
       end
 
@@ -37,12 +34,9 @@ module Axiom
       # @api private
       def self.coerce(other)
         case other
-        when ::BigDecimal
-          [ inverse, self ]
-        when number
-          [ self, self ]
-        when ::Numeric
-          [ inverse, self ]
+        when ::BigDecimal then [ inverse, self ]
+        when number       then [ self,    self ]
+        when ::Numeric    then [ inverse, self ]
         else
           raise ::TypeError, "#{other.class} cannot be coerced"
         end
@@ -94,12 +88,9 @@ module Axiom
       # @api private
       def self.<=>(other)
         case other
-        when ::BigDecimal
-          -1
-        when number
-          0
-        when ::Numeric, inverse.singleton_class
-          -1
+        when ::BigDecimal                       then -1
+        when number                             then  0
+        when ::Numeric, inverse.singleton_class then -1
         end
       end
 
