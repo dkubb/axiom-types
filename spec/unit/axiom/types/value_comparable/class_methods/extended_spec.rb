@@ -30,11 +30,11 @@ describe Axiom::Types::ValueComparable, '.extended' do
       from(false).to(true)
   end
 
-  it 'sets the default minimum' do
-    expect(subject.minimum).to equal(Axiom::Types::Infinity)
+  it 'does not set the default minimum' do
+    expect(subject.minimum).to be_nil
   end
 
-  it 'sets the default maximum' do
-    expect(subject.maximum).to equal(Axiom::Types::NegativeInfinity)
+  it 'does not set the default maximum' do
+    expect(subject.maximum).to be_nil
   end
 end
