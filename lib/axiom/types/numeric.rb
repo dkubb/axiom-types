@@ -10,8 +10,8 @@ module Axiom
       primitive       ::Numeric
       coercion_method :to_numeric
 
-      minimum Infinity
-      maximum NegativeInfinity
+      minimum NegativeInfinity
+      maximum Infinity
 
     end # class Numeric
   end # module Types
