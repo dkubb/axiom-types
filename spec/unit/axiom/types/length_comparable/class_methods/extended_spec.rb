@@ -29,4 +29,12 @@ describe Axiom::Types::LengthComparable, '.extended' do
     expect { subject }.to change { object.respond_to?(:maximum_length) }.
       from(false).to(true)
   end
+
+  it 'sets the default minimum_length' do
+    expect(subject.minimum_length).to eql(-::Float::INFINITY)
+  end
+
+  it 'sets the default maximum_length' do
+    expect(subject.maximum_length).to eql(::Float::INFINITY)
+  end
 end

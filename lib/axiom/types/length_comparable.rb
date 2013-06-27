@@ -17,7 +17,11 @@ module Axiom
       # @api private
       def self.extended(descendant)
         super
-        descendant.accept_options :minimum_length, :maximum_length
+        descendant.class_eval do
+          accept_options :minimum_length, :maximum_length
+          minimum_length -::Float::INFINITY
+          maximum_length  ::Float::INFINITY
+        end
       end
 
       # Finalize by setting up a length range constraint
