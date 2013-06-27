@@ -5,6 +5,8 @@ module Axiom
 
     # Represents a numeric type
     class Numeric < Object
+      extend ValueComparable
+
       primitive       ::Numeric
       coercion_method :to_numeric
 
