@@ -19,6 +19,8 @@ module Axiom
       # @api private
       def self.<=>(other)
         case other
+        when ::BigDecimal
+          1
         when number
           0
         when ::Numeric, inverse.singleton_class
@@ -35,6 +37,8 @@ module Axiom
       # @api private
       def self.coerce(other)
         case other
+        when ::BigDecimal
+          [ inverse, self ]
         when number
           [ self, self ]
         when ::Numeric
@@ -90,6 +94,8 @@ module Axiom
       # @api private
       def self.<=>(other)
         case other
+        when ::BigDecimal
+          -1
         when number
           0
         when ::Numeric, inverse.singleton_class
