@@ -31,10 +31,10 @@ describe Axiom::Types::ValueComparable, '.extended' do
   end
 
   it 'sets the default minimum' do
-    expect(subject.minimum).to eql(-::Float::INFINITY)
+    expect(subject.minimum).to equal(Axiom::Types::Infinity)
   end
 
   it 'sets the default maximum' do
-    expect(subject.maximum).to eql(::Float::INFINITY)
+    expect(subject.maximum).to equal(Axiom::Types::NegativeInfinity)
   end
 end

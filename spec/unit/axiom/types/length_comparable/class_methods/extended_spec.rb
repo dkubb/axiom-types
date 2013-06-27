@@ -31,10 +31,10 @@ describe Axiom::Types::LengthComparable, '.extended' do
   end
 
   it 'sets the default minimum_length' do
-    expect(subject.minimum_length).to eql(-::Float::INFINITY)
+    expect(subject.minimum_length).to equal(Axiom::Types::Infinity)
   end
 
   it 'sets the default maximum_length' do
-    expect(subject.maximum_length).to eql(::Float::INFINITY)
+    expect(subject.maximum_length).to equal(Axiom::Types::NegativeInfinity)
   end
 end

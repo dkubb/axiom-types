@@ -19,8 +19,8 @@ module Axiom
         super
         descendant.class_eval do
           accept_options :minimum, :maximum
-          minimum -::Float::INFINITY
-          maximum  ::Float::INFINITY
+          minimum Infinity
+          maximum NegativeInfinity
         end
       end
 
