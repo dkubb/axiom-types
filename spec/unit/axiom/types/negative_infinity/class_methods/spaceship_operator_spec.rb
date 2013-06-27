@@ -5,13 +5,20 @@ describe Axiom::Types::NegativeInfinity, '.<=>' do
 
   let(:object) { described_class }
 
-  context 'when the other object is a number' do
-    let(:other) { 1 }
+  [
+    1,               # Fixnum
+    2**63,           # Bignum
+    1.0,             # Float
+    Rational(1, 1),  # Rational
+  ].each do |number|
+    context "when other object is a #{number.class}" do
+      let(:other) { number }
 
-    it { should be(-1) }
+      it { should be(-1) }
 
-    it 'is symmetric' do
-      should be(-(other <=> object))
+      it 'is symmetric' do
+        should be(-(other <=> object))
+      end
     end
   end
 
