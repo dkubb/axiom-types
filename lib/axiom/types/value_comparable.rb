@@ -45,7 +45,8 @@ module Axiom
       #
       # @api private
       def has_value_within_range
-        constraint { |object| object.between?(minimum, maximum) }
+        range = minimum..maximum
+        constraint(range.method(:cover?))
       end
 
     end # module ValueComparable

@@ -45,9 +45,8 @@ module Axiom
       #
       # @api private
       def has_length_within_range
-        constraint do |object|
-          object.length.between?(minimum_length, maximum_length)
-        end
+        range = minimum_length..maximum_length
+        constraint { |object| range.cover?(object.length) }
       end
 
     end # module LengthComparable
