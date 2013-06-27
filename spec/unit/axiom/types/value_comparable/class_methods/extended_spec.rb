@@ -29,4 +29,12 @@ describe Axiom::Types::ValueComparable, '.extended' do
     expect { subject }.to change { object.respond_to?(:maximum) }.
       from(false).to(true)
   end
+
+  it 'sets the default minimum' do
+    expect(subject.minimum).to eql(-::Float::INFINITY)
+  end
+
+  it 'sets the default maximum' do
+    expect(subject.maximum).to eql(::Float::INFINITY)
+  end
 end

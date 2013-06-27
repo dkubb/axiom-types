@@ -17,7 +17,11 @@ module Axiom
       # @api private
       def self.extended(descendant)
         super
-        descendant.accept_options :minimum, :maximum
+        descendant.class_eval do
+          accept_options :minimum, :maximum
+          minimum -::Float::INFINITY
+          maximum  ::Float::INFINITY
+        end
       end
 
       # Finalize by setting up a value range constraint
