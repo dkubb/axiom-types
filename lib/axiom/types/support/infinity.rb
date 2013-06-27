@@ -4,7 +4,8 @@ module Axiom
   module Types
 
     # Represent an infinite number
-    class Infinity
+    class Infinity < BasicObject
+      extend ::Comparable
 
       # Test the number against infinity
       #
@@ -17,7 +18,30 @@ module Axiom
       #
       # @api private
       def self.<=>(other)
-        equal?(other) ? 0 : 1
+        case other
+        when number
+          0
+        when ::Numeric, inverse.singleton_class
+          1
+        end
+      end
+
+      # Coerce a number into an Infinity class for comparison
+      #
+      # @param [::Numeric] other
+      #
+      # @return [Array(Infinity, Infinity)]
+      #
+      # @api private
+      def self.coerce(other)
+        case other
+        when number
+          [ self, self ]
+        when ::Numeric
+          [ inverse, self ]
+        else
+          raise ::TypeError, "#{other.class} cannot be coerced"
+        end
       end
 
       # Return the next successive object, which is always self
@@ -28,6 +52,26 @@ module Axiom
       def self.succ
         self
       end
+
+      # The inverse of infinity
+      #
+      # @return [Class<NegativeInfinity>]
+      #
+      # @api private
+      def self.inverse
+        NegativeInfinity
+      end
+      private_class_method :inverse
+
+      # The numeric representation of infinity
+      #
+      # @return [Float]
+      #
+      # @api private
+      def self.number
+        ::Float::INFINITY
+      end
+      private_class_method :number
 
     end # class Infinity
 
@@ -44,9 +88,34 @@ module Axiom
       #   returned if the other object is something other than negative infinity
       #
       # @api private
-      def self.<=>(_other)
-        -super
+      def self.<=>(other)
+        case other
+        when number
+          0
+        when ::Numeric, inverse.singleton_class
+          -1
+        end
       end
+
+      # The inverse of negative infinity
+      #
+      # @return [Class<Infinity>]
+      #
+      # @api private
+      def self.inverse
+        Infinity
+      end
+      private_class_method :inverse
+
+      # The numeric representation of negative infinity
+      #
+      # @return [Float]
+      #
+      # @api private
+      def self.number
+        -::Float::INFINITY
+      end
+      private_class_method :number
 
     end # class NegativeInfinity
   end # module Types

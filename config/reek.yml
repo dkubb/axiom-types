@@ -52,7 +52,8 @@ NilCheck:
     - Axiom::Types::Type#self.constraint
 RepeatedConditional:
   enabled: true
-  exclude: []
+  exclude:
+  - Axiom::Types::Infinity
   max_ifs: 1
 TooManyInstanceVariables:
   enabled: true

@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Axiom::Types::Infinity, '.succ' do
-  subject { described_class.succ }
+  subject { object.succ }
 
-  it { should be(described_class) }
+  let(:object) { described_class }
+
+  it { should be(object) }
 end
