@@ -39,7 +39,7 @@ describe Axiom::Types::NegativeInfinity, '.<=>' do
     it { should be(0) }
 
     it 'is symmetric' do
-      should be(-(other <=> object))
+      should be(other <=> object)
     end
   end
 
@@ -49,7 +49,7 @@ describe Axiom::Types::NegativeInfinity, '.<=>' do
     it { should be(0) }
 
     it 'is symmetric' do
-      should be(-(other <=> object))
+      should be(other <=> object)
     end
   end
 
