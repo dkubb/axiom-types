@@ -44,6 +44,12 @@ describe Axiom::Types::Object, '.infer' do
     end
   end
 
+  context 'when the argument is an object instance' do
+    let(:arg) { ::Object.new }
+
+    it { should be_nil }
+  end
+
   context 'when the argument is nil' do
     let(:arg) { nil }
 

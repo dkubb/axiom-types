@@ -30,4 +30,10 @@ describe Axiom::Types::Boolean, '.infer' do
 
     it { should be_nil }
   end
+
+  context 'when the argument is not nil' do
+    let(:arg) { 1 }
+
+    it { should be_nil }
+  end
 end
