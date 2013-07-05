@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Axiom::Types::Encodable, '#finalize', :if => RUBY_VERSION >= '1.9' do
+describe Axiom::Types::Encodable, '#finalize' do
   subject { object.finalize }
 
   let(:object) { Class.new(Axiom::Types::Type).extend(described_class) }

@@ -69,7 +69,7 @@ module Axiom
         constraint { |object| object.encoding.equal?(encoding) }
       end
 
-    end if RUBY_VERSION >= '1.9'
+    end
 
   end # module Types
 end # module Axiom

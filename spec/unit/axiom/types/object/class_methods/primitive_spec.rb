@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe Axiom::Types::Object, '.primitive' do
-  let(:object)    { Class.new(described_class)                      }
-  let(:primitive) { RUBY_VERSION < '1.9' ? ::Object : ::BasicObject }
+  let(:object)    { Class.new(described_class) }
+  let(:primitive) { ::BasicObject              }
 
   context 'with no arguments' do
     subject { object.primitive }
