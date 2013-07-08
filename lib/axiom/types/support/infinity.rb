@@ -34,9 +34,9 @@ module Axiom
       # @api private
       def self.coerce(other)
         case other
-        when ::BigDecimal then [ inverse, self ]
-        when number       then [ self,    self ]
-        when ::Numeric    then [ inverse, self ]
+        when ::BigDecimal then [inverse, self]
+        when number       then [self,    self]
+        when ::Numeric    then [inverse, self]
         else
           raise ::TypeError, "#{other.class} cannot be coerced"
         end
@@ -83,7 +83,7 @@ module Axiom
       # @return [0]
       #   returned if the other object is negative infinity
       # @return [-1]
-      #   returned if the other object is something other than negative infinity
+      #   returned if the other object is not negative infinity
       #
       # @api private
       def self.<=>(other)

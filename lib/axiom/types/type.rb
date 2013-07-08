@@ -136,12 +136,13 @@ module Axiom
       #
       # @api private
       def self.add_constraint(constraint)
-        current     = self.constraint
-        @constraint = if current
-          lambda { |object| constraint.call(object) && current.call(object) }
-        else
-          constraint
-        end
+        current = self.constraint
+        @constraint =
+          if current
+            ->(object) { constraint.call(object) && current.call(object) }
+          else
+            constraint
+          end
       end
 
       private_class_method :add_constraint

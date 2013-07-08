@@ -20,8 +20,8 @@ describe Axiom::Types::Object, '.primitive' do
     it_should_behave_like 'a command method'
 
     it 'sets the primitive' do
-      expect { subject }.to change { object.primitive.object_id }.
-        from(primitive.object_id).to(klass.object_id)
+      expect { subject }.to change { object.primitive.object_id }
+        .from(primitive.object_id).to(klass.object_id)
     end
   end
 end

@@ -51,6 +51,7 @@ module Axiom
         self if object.respond_to?(:ancestors) &&
                 object.ancestors.include?(primitive)
       end
+      private_class_method :infer_from_primitive_class
 
       # Add a constraint for the primitive
       #
@@ -60,8 +61,7 @@ module Axiom
       def self.inherits_from_primitive
         constraint(&primitive.method(:===))
       end
-
-      private_class_method :infer_from_primitive_class, :inherits_from_primitive
+      private_class_method :inherits_from_primitive
 
     end # class Object
   end # module Types

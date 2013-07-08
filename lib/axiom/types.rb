@@ -8,6 +8,8 @@ require 'ice_nine'
 require 'descendants_tracker'
 
 module Axiom
+
+  # Gem namespace
   module Types
 
     # Represent an undefined argument
@@ -22,8 +24,8 @@ module Axiom
     # Cache the type inference lookup by object
     @inference_cache = Hash.new do |cache, object|
       type = nil
-      Type.descendants.each do |descendant|
-        break if type = descendant.infer(object)
+      Type.descendants.detect do |descendant|
+        type = descendant.infer(object)
       end
       cache[object] = type
     end

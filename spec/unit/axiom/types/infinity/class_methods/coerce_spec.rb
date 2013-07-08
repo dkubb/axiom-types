@@ -16,7 +16,7 @@ describe Axiom::Types::Infinity, '.coerce' do
       let(:other) { number }
 
       it 'coerces into an array containing inverse and self' do
-        should eql([ Axiom::Types::NegativeInfinity, object ])
+        should eql([Axiom::Types::NegativeInfinity, object])
       end
 
       it 'coerces when comparing' do
@@ -30,7 +30,7 @@ describe Axiom::Types::Infinity, '.coerce' do
     let(:other) { Float::INFINITY }
 
     it 'coerces into an array containing inverse and self' do
-      should eql([ Axiom::Types::Infinity, object ])
+      should eql([Axiom::Types::Infinity, object])
     end
 
     it 'coerces when comparing' do
@@ -43,7 +43,7 @@ describe Axiom::Types::Infinity, '.coerce' do
     let(:other) { -Float::INFINITY }
 
     it 'coerces into an array containing inverse and self' do
-      should eql([ Axiom::Types::NegativeInfinity, object ])
+      should eql([Axiom::Types::NegativeInfinity, object])
     end
 
     it 'coerces when comparing' do

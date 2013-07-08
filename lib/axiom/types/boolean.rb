@@ -20,8 +20,10 @@ module Axiom
       #
       # @api private
       def self.infer_from_primitive_class(object)
-        self if TrueClass.singleton_class  === object ||
-                FalseClass.singleton_class === object
+        case object
+        when TrueClass.singleton_class, FalseClass.singleton_class
+          self
+        end
       end
 
       private_class_method :infer_from_primitive_class

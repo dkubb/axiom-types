@@ -9,7 +9,7 @@ module Axiom
 
       # The minimum and maximum seconds for Time on 32-bit systems
       MINIMUM_SECONDS = -2**31
-      MAXIMUM_SECONDS =  2**31-1
+      MAXIMUM_SECONDS =  2**31 - 1
 
       primitive       ::Time
       coercion_method :to_time

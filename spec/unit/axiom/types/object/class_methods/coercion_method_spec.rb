@@ -20,8 +20,8 @@ describe Axiom::Types::Object, '.coercion_method' do
     it_should_behave_like 'a command method'
 
     it 'sets the coercion_method' do
-      expect { subject }.to change { object.coercion_method }.
-        from(coercion_method).to(symbol)
+      expect { subject }.to change { object.coercion_method }
+        .from(coercion_method).to(symbol)
     end
   end
 end

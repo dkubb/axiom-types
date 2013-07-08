@@ -76,6 +76,7 @@ module Axiom
         member_type = Types.infer(member) || Object
         infer_from(member_type) || new_from(member_type)
       end
+      private_class_method :infer_from_primitive_instance
 
       # Infer the type from the member_type
       #
@@ -90,6 +91,7 @@ module Axiom
       def self.infer_from(member_type)
         self if self.member_type.equal?(member_type)
       end
+      private_class_method :infer_from
 
       # Instantiate a new type from a base type
       #
@@ -104,6 +106,7 @@ module Axiom
       def self.new_from(member_type)
         new { member_type(member_type) } if base?
       end
+      private_class_method :new_from
 
       # Test if the type is a base type
       #
@@ -113,6 +116,7 @@ module Axiom
       def self.base?
         # noop
       end
+      private_class_method :base?
 
       # Add a constraints for the member
       #
@@ -125,8 +129,7 @@ module Axiom
         end
       end
 
-      private_class_method :infer_from_primitive_instance, :infer_from,
-        :new_from, :base?, :matches_member_type
+      private_class_method :matches_member_type
 
     end # class Collection
   end # module Types

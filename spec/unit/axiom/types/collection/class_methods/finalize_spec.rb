@@ -16,7 +16,7 @@ describe Axiom::Types::Collection, '.finalize' do
     its(:constraint) { should be_frozen }
 
     it 'adds a constraint that returns true for a collection' do
-      should include([ Object.new ])
+      should include([Object.new])
     end
 
     it 'adds a constraint that returns false for a non-collection' do
@@ -39,11 +39,11 @@ describe Axiom::Types::Collection, '.finalize' do
     its(:constraint) { should be_frozen }
 
     it 'adds a constraint that returns true for a valid member' do
-      should include([ member ])
+      should include([member])
     end
 
     it 'adds a constraint that returns false for an invalid member' do
-      should_not include([ member.to_s ])
+      should_not include([member.to_s])
     end
   end
 end

@@ -116,8 +116,10 @@ module Axiom
       # @api private
       def assert_method_available(name)
         return unless respond_to?(name)
-        raise ReservedMethodError,
+        raise(
+          ReservedMethodError,
           "method named `#{name.inspect}` is already defined"
+        )
       end
 
       # Adds a reader/writer method for the give option name

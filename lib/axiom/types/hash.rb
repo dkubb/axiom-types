@@ -60,6 +60,7 @@ module Axiom
         value_type = Types.infer(value) || Object
         infer_from(key_type, value_type) || new_from(key_type, value_type)
       end
+      private_class_method :infer_from_primitive_instance
 
       # Infer the type from the key_type and value_type
       #
@@ -77,6 +78,7 @@ module Axiom
           self
         end
       end
+      private_class_method :infer_from
 
       # Instantiate a new type from a base type
       #
@@ -92,6 +94,7 @@ module Axiom
       def self.new_from(key_type, value_type)
         new { key_type(key_type).value_type(value_type) } if base?
       end
+      private_class_method :new_from
 
       # Test if the type is a base type
       #
@@ -101,6 +104,7 @@ module Axiom
       def self.base?
         equal?(Hash)
       end
+      private_class_method :base?
 
       # Add a constraints for the key and value
       #
@@ -114,9 +118,7 @@ module Axiom
           end
         end
       end
-
-      private_class_method :infer_from_primitive_instance, :infer_from,
-        :new_from, :base?, :matches_key_and_value_types
+      private_class_method :matches_key_and_value_types
 
     end # class Hash
   end # module Types

@@ -9,7 +9,7 @@ describe Axiom::Types::Options, '#accept_options' do
   let(:descendant) { Class.new(object)                                }
 
   context 'with valid options' do
-    let(:new_options) { [ :primitive, :coerce_method ] }
+    let(:new_options) { [:primitive, :coerce_method] }
 
     it_should_behave_like 'a command method'
     it_should_behave_like 'an idempotent method'
@@ -86,7 +86,7 @@ describe Axiom::Types::Options, '#accept_options' do
   end
 
   context 'with an option that conflicts with an existing method' do
-    let(:new_options) { [ :name ] }
+    let(:new_options) { [:name] }
 
     specify do
       expect { subject }.to raise_error(

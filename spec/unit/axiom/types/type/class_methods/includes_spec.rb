@@ -8,8 +8,8 @@ describe Axiom::Types::Type, '.includes' do
   let(:object) { Class.new(described_class) }
 
   context 'with a non-empty list' do
-    let(:member)  { Object.new         }
-    let(:members) { [ member, member ] }
+    let(:member)  { Object.new       }
+    let(:members) { [member, member] }
 
     it_should_behave_like 'a command method'
 

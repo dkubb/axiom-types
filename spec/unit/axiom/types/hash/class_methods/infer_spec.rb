@@ -12,25 +12,25 @@ describe Axiom::Types::Hash, '.infer' do
   context 'with Axiom::Types::Hash' do
     let(:object) { described_class }
 
-    context 'when the argument is the type object' do
+    context 'with a type object' do
       let(:arg) { object }
 
       it { should be(object) }
     end
 
-    context 'when the argument is ::Hash' do
+    context 'with a ::Hash' do
       let(:arg) { ::Hash }
 
       it { should be(object) }
     end
 
-    context 'when the argument is an empty Hash' do
+    context 'with an empty Hash' do
       let(:arg) { ::Hash[] }
 
       it { should be(object) }
     end
 
-    context 'when the argument is an Hash with a key type and nil value' do
+    context 'with an Hash with a key type and nil value' do
       let(:arg) { ::Hash[object => nil] }
 
       its(:ancestors) { should include(object) }
@@ -42,7 +42,7 @@ describe Axiom::Types::Hash, '.infer' do
       its(:value_type) { should be(Axiom::Types::Object) }
     end
 
-    context 'when the argument is an Hash with a nil key and value type' do
+    context 'with an Hash with a nil key and value type' do
       let(:arg) { ::Hash[nil => object] }
 
       its(:ancestors) { should include(object) }
@@ -54,7 +54,7 @@ describe Axiom::Types::Hash, '.infer' do
       its(:value_type) { should be(object) }
     end
 
-    context 'when the argument is an Hash with key and value types' do
+    context 'with an Hash with key and value types' do
       let(:arg) { ::Hash[object => object] }
 
       its(:ancestors) { should include(object) }
@@ -66,7 +66,7 @@ describe Axiom::Types::Hash, '.infer' do
       its(:value_type) { should be(object) }
     end
 
-    context 'when the argument is an Hash with a key primitive and nil value' do
+    context 'with an Hash with a key primitive and nil value' do
       let(:arg) { ::Hash[::Hash => nil] }
 
       its(:ancestors) { should include(object) }
@@ -78,7 +78,7 @@ describe Axiom::Types::Hash, '.infer' do
       its(:value_type) { should be(Axiom::Types::Object) }
     end
 
-    context 'when the argument is an Hash with a nil key and value primitive' do
+    context 'with an Hash with a nil key and value primitive' do
       let(:arg) { ::Hash[nil => ::Hash] }
 
       its(:ancestors) { should include(object) }
@@ -90,7 +90,7 @@ describe Axiom::Types::Hash, '.infer' do
       its(:value_type) { should be(object) }
     end
 
-    context 'when the argument is an Hash with key and value primitives' do
+    context 'with an Hash with key and value primitives' do
       let(:arg) { ::Hash[::Hash => ::Hash] }
 
       its(:ancestors) { should include(object) }
@@ -124,49 +124,49 @@ describe Axiom::Types::Hash, '.infer' do
       it { should be(object) }
     end
 
-    context 'when the argument is an empty Hash' do
+    context 'with an empty Hash' do
       let(:arg) { ::Hash[] }
 
       it { should be(object) }
     end
 
-    context 'when the argument is an Hash with a key type and nil value' do
+    context 'with an Hash with a key type and nil value' do
       let(:arg) { ::Hash[object => nil] }
 
       it { should be_nil }
     end
 
-    context 'when the argument is an Hash with a nil key and value type' do
+    context 'with an Hash with a nil key and value type' do
       let(:arg) { ::Hash[nil => object] }
 
       it { should be_nil }
     end
 
-    context 'when the argument is an Hash with key and value types' do
+    context 'with an Hash with key and value types' do
       let(:arg) { ::Hash[object => object] }
 
       it { should be_nil }
     end
 
-    context 'when the argument is an Hash with a key primitive and nil value' do
+    context 'with an Hash with a key primitive and nil value' do
       let(:arg) { ::Hash[::Hash => nil] }
 
       it { should be_nil }
     end
 
-    context 'when the argument is an Hash with a nil key and value primitive' do
+    context 'with an Hash with a nil key and value primitive' do
       let(:arg) { ::Hash[nil => ::Hash] }
 
       it { should be_nil }
     end
 
-    context 'when the argument is an Hash with key and value primitives' do
+    context 'with an Hash with key and value primitives' do
       let(:arg) { ::Hash[::Hash => ::Hash] }
 
       it { should be_nil }
     end
 
-    context 'when the argument is nil' do
+    context 'with a nil' do
       let(:arg) { nil }
 
       it { should be_nil }
