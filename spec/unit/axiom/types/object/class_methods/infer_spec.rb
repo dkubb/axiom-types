@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 require 'spec_helper'
-require 'backports/basic_object' unless defined?(::BasicObject)
 
 describe Axiom::Types::Object, '.infer' do
   subject { object.infer(arg) }

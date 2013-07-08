@@ -2,23 +2,28 @@
 
 guard :bundler do
   watch('Gemfile')
-  watch('axiom-types.gemspec')
+  watch('Gemfile.lock')
+  watch(%w{.+.gemspec\z})
 end
 
 guard :rspec, :keep_failed => false do
   # run all specs if configuration is modified
+  watch('.rspec')              { 'spec' }
   watch('Guardfile')           { 'spec' }
   watch('Gemfile.lock')        { 'spec' }
   watch('spec/spec_helper.rb') { 'spec' }
 
   # run all specs if supporting files files are modified
-  watch(%r{\Aspec/(?:lib|support|shared)/.+\.rb\z}) { 'spec' }
+  watch(%r{\Aspec/(?:fixtures|shared|support)/.+\.rb\z}) { 'spec' }
 
-  # run unit specs if associated lib code is modified
-  watch(%r{\Alib/(.+)\.rb\z})                                         { |m| Dir["spec/unit/#{m[1]}"]         }
-  watch(%r{\Alib/(.+)/support/(.+)\.rb\z})                            { |m| Dir["spec/unit/#{m[1]}/#{m[2]}"] }
-  watch("lib/#{File.basename(File.expand_path('../', __FILE__))}.rb") { 'spec'                               }
+  # Run specs if associated app or lib code is modified
+  watch(%r{\Alib/(.+)\.rb\z}) { |m| Dir["spec/{unit,integration}/#{m[1]}_spec.rb"] }
 
   # run a spec if it is modified
   watch(%r{\Aspec/(?:unit|integration)/.+_spec\.rb\z})
+end
+
+guard :rubocop, cli: %w[--config config/rubocop.yml] do
+  watch(%r{.+\.(?:rb|rake)\z})
+  watch(%r{(?:.+/)?\.rubocop\.yml\z}) { |m| File.dirname(m[0]) }
 end
