@@ -86,12 +86,9 @@ module Axiom
       #   returned if the other object is not negative infinity
       #
       # @api private
-      def self.<=>(other)
-        case other
-        when ::BigDecimal                       then -1
-        when number                             then  0
-        when ::Numeric, inverse.singleton_class then -1
-        end
+      def self.<=>(_other)
+        comparison = super
+        -comparison if comparison
       end
 
       # The inverse of negative infinity
