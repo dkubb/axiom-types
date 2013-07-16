@@ -15,7 +15,7 @@ describe Axiom::Types::Encodable, '#finalize' do
 
     its(:constraint) { should be_frozen }
 
-    defined?(::Encoding) && Encoding.list.each do |encoding|
+    Encoding.list.each do |encoding|
       if encoding.equal?(Encoding::UTF_8)
         string = '𝒜wesome'.force_encoding(encoding)
         it "adds a constraint that returns true for #{encoding} encoding" do
@@ -50,7 +50,7 @@ describe Axiom::Types::Encodable, '#finalize' do
 
     its(:constraint) { should be_frozen }
 
-    defined?(::Encoding) && Encoding.list.each do |encoding|
+    Encoding.list.each do |encoding|
       if encoding.equal?(Encoding::UTF_16BE)
         string = '𝒜wesome'.force_encoding(encoding)
         it "adds a constraint that returns true for #{encoding} encoding" do
