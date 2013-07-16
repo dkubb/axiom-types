@@ -16,13 +16,23 @@ describe Axiom::Types::Encodable, '#finalize' do
     its(:constraint) { should be_frozen }
 
     defined?(::Encoding) && Encoding.list.each do |encoding|
-      if encoding.ascii_compatible?
+      if encoding.equal?(Encoding::UTF_8)
+        string = '𝒜wesome'.force_encoding(encoding)
         it "adds a constraint that returns true for #{encoding} encoding" do
-          should include(''.force_encoding(encoding))
+          should include(string)
+          should include(string.to_sym)
+        end
+      elsif encoding.ascii_compatible?
+        string = ''.force_encoding(encoding)
+        it "adds a constraint that returns true for #{encoding} encoding" do
+          should include(string)
+          should include(string.to_sym)
         end
       else
+        string = ''.force_encoding(encoding)
         it "adds a constraint that returns false for #{encoding} encoding" do
-          should_not include(''.force_encoding(encoding))
+          should_not include(string)
+          should_not include(string.to_sym)
         end
       end
     end
@@ -42,12 +52,16 @@ describe Axiom::Types::Encodable, '#finalize' do
 
     defined?(::Encoding) && Encoding.list.each do |encoding|
       if encoding.equal?(Encoding::UTF_16BE)
+        string = '𝒜wesome'.force_encoding(encoding)
         it "adds a constraint that returns true for #{encoding} encoding" do
-          should include(''.force_encoding(encoding))
+          should include(string)
+          should include(string.to_sym)
         end
       else
+        string = ''.force_encoding(encoding)
         it "adds a constraint that returns false for #{encoding} encoding" do
-          should_not include(''.force_encoding(encoding))
+          should_not include(string)
+          should_not include(string.to_sym)
         end
       end
     end
