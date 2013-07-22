@@ -30,7 +30,7 @@ module Axiom
       # @example
       #   type = Axiom::Types::Type.new  # => Axiom::Types::Type
       #
-      # @param [#call] constraint
+      # @param [Array(#call)] args
       #   optional constraint for the new type
       #
       # @yield [object]
@@ -44,9 +44,9 @@ module Axiom
       # @return [Class<Axiom::Types::Type>]
       #
       # @api public
-      def self.new(constraint = Undefined, &block)
+      def self.new(*args, &block)
         type = ::Class.new(self, &block)
-        type.constraint(constraint)
+        type.constraint(*args)
         type.finalize
       end
 
