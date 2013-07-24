@@ -28,6 +28,13 @@ describe Axiom::Types::Object, '.infer' do
   Axiom::Types::Object.descendants.each do |descendant|
     primitive = descendant.primitive
 
+    context "when the argument is #{descendant}" do
+      let(:object) { descendant }
+      let(:arg)    { object     }
+
+      it { should be(object) }
+    end
+
     context "when the argument is ::#{primitive}" do
       let(:arg) { primitive }
 
