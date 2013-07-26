@@ -24,6 +24,7 @@ module Axiom
           assert_method_available(new_option)
           add_accepted_option(new_option)
           define_option_method(new_option)
+          set_option(new_option, nil)
         end
         self
       end
@@ -130,7 +131,7 @@ module Axiom
       #
       # @api private
       def define_option_method(name)
-        ivar = "@#{name}"
+        ivar = :"@#{name}"
         define_singleton_method(name) do |*args|
           return instance_variable_get(ivar) if args.empty?
           instance_variable_set(ivar, *args)
