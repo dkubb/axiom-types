@@ -20,10 +20,18 @@ describe Axiom::Types::Options, '#accept_options' do
       expect(object).to respond_to(*new_options)
     end
 
+    it 'defines the instance variables for the options' do
+      subject
+      expect(object.instance_variable_defined?(:@primitive)).to be(true)
+      expect(object.instance_variable_defined?(:@coerce_method)).to be(true)
+    end
+
     it 'adds methods to the object that can set a value' do
       subject
-      object.primitive(::Symbol)
-      expect(object.primitive).to be(::Symbol)
+      expect { object.primitive(Class) }
+        .to change(object, :primitive).from(nil).to(Class)
+      expect { object.coerce_method(:to_class) }
+        .to change(object, :coerce_method).from(nil).to(:to_class)
     end
 
     context 'with the descendant class' do
