@@ -23,15 +23,14 @@ module Axiom
         (new_options - accepted_options).each do |new_option|
           assert_method_available(new_option)
           define_option_method(new_option)
-          add_accepted_option(new_option)
-          public_send(new_option, nil)
+          setup_option(new_option)
         end
         self
       end
 
     protected
 
-      # Adds new option that an attribute class can accept
+      # Set up the option in the current class and descendants
       #
       # @param [Symbol] new_option
       #   new option to be added
@@ -39,7 +38,8 @@ module Axiom
       # @return [self]
       #
       # @api private
-      def add_accepted_option(new_option)
+      def setup_option(new_option)
+        instance_variable_set(:"@#{new_option}", nil)
         accepted_options << new_option
         descendants.each do |descendant|
           descendant.send(__method__, new_option)
@@ -59,7 +59,7 @@ module Axiom
       def inherited(descendant)
         super
         options.each do |option, value|
-          descendant.add_accepted_option(option).public_send(option, value)
+          descendant.setup_option(option).public_send(option, value)
         end
       end
 
