@@ -8,6 +8,9 @@ module Axiom
       primitive       ::Float
       coercion_method :to_float
 
+      minimum primitive::MIN
+      maximum primitive::MAX
+
     end # class Float
   end # module Types
 end # module Axiom
