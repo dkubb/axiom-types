@@ -22,8 +22,8 @@ module Axiom
       def accept_options(*new_options)
         (new_options - accepted_options).each do |new_option|
           assert_method_available(new_option)
-          add_accepted_option(new_option)
           define_option_method(new_option)
+          add_accepted_option(new_option)
           public_send(new_option, nil)
         end
         self
