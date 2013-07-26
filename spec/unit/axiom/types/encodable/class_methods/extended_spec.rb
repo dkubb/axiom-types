@@ -16,6 +16,7 @@ describe Axiom::Types::Encodable, '.extended' do
     Module.any_instance.stub(:extended).with(object)
 
     delegated_ancestor = false
+    Module.send(:undef_method, :extended)
     Module.send(:define_method, :extended) { |_| delegated_ancestor = true }
     expect { subject }.to change { delegated_ancestor }.from(false).to(true)
   end

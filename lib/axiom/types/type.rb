@@ -82,6 +82,9 @@ module Axiom
         constraint.call(object)
       end
 
+      # Silence warnings when redeclaring constraint
+      singleton_class.class_eval { undef_method :constraint }
+
       # Add a constraint to the type
       #
       # @example with an argument
