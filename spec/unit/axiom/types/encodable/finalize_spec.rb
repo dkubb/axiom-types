@@ -10,7 +10,7 @@ describe Axiom::Types::Encodable, '#finalize' do
   # TODO: update jruby version to highest stable with the encoding bug
   let(:jruby) do
     RUBY_PLATFORM.include?('java') &&
-    JRUBY_VERSION <= '1.7.4' &&
+    JRUBY_VERSION <= '1.7.5dev' &&
     RUBY_VERSION >= '1.9.3'
   end
 
