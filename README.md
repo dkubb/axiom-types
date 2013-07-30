@@ -1,3 +1,8 @@
+axiom-types
+===========
+
+Define types with optional constraints for use within axiom and other libraries.
+
 [![Gem Version](https://badge.fury.io/rb/axiom-types.png)][gem]
 [![Build Status](https://secure.travis-ci.org/dkubb/axiom-types.png?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/dkubb/axiom-types.png)][gemnasium]
@@ -9,11 +14,6 @@
 [gemnasium]: https://gemnasium.com/dkubb/axiom-types
 [codeclimate]: https://codeclimate.com/github/dkubb/axiom-types
 [coveralls]: https://coveralls.io/r/dkubb/axiom-types
-
-axiom-types
-===========
-
-Define types with optional constraints for use within axiom and other libraries.
 
 Examples
 --------
@@ -33,29 +33,6 @@ Name.include?('a')       # => true
 Name.include?('a' * 30)  # => true
 Name.include?('')        # => false
 Name.include?('a' * 31)  # => false
-```
-
-Installation
-------------
-
-With Rubygems:
-
-```bash
-$ gem install axiom-types
-$ irb -rubygems
->> require 'axiom-types'
-=> true
-```
-
-With git and local working copy:
-
-```bash
-$ git clone git://github.com/dkubb/axiom-types.git
-$ cd axiom-types
-$ rake install
-$ irb -rubygems
->> require 'axiom-types'
-=> true
 ```
 
 Contributing
