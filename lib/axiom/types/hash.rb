@@ -14,6 +14,9 @@ module Axiom
 
       # Infer the type of the object
       #
+      # @example
+      #   type = Axiom::Types.infer(object)
+      #
       # @param [Object] object
       #
       # @return [Class<Axiom::Types::Hash>]
