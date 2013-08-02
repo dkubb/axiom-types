@@ -6,17 +6,7 @@ describe Axiom::Types::Encodable, '#finalize' do
   subject { object.finalize }
 
   let(:object) { Class.new(Axiom::Types::Type).extend(described_class) }
-
-  # TODO: update jruby version to highest stable with the encoding bug
-  let(:jruby) do
-    RUBY_PLATFORM.include?('java') &&
-    JRUBY_VERSION <= '1.7.5.dev' &&
-    RUBY_VERSION >= '1.9.3'
-  end
-
-  def pending_if(boolean, &block)
-    boolean ? pending(&block) : block.call
-  end
+  let(:jruby)  { RUBY_PLATFORM.include?('java')                        }
 
   context 'when an ascii compatible encoding (UTF-8) is used' do
     it_should_behave_like 'a command method'
@@ -31,21 +21,19 @@ describe Axiom::Types::Encodable, '#finalize' do
         string = '𝒜wesome'.force_encoding(encoding)
         it "adds a constraint that returns true for #{encoding} encoding" do
           should include(string)
-          should include(string.to_sym)
+          should include(string.to_sym) unless jruby
         end
       elsif encoding.ascii_compatible?
         string = ''.force_encoding(encoding)
         it "adds a constraint that returns true for #{encoding} encoding" do
           should include(string)
-          should include(string.to_sym)
+          should include(string.to_sym) unless jruby
         end
       else
         string = ''.force_encoding(encoding)
         it "adds a constraint that returns false for #{encoding} encoding" do
           should_not include(string)
-          pending_if jruby do
-            should_not include(string.to_sym)
-          end
+          should_not include(string.to_sym) unless jruby
         end
       end
     end
@@ -68,15 +56,13 @@ describe Axiom::Types::Encodable, '#finalize' do
         string = '𝒜wesome'.force_encoding(encoding)
         it "adds a constraint that returns true for #{encoding} encoding" do
           should include(string)
-          pending_if jruby do
-            should include(string.to_sym)
-          end
+          should include(string.to_sym) unless jruby
         end
       else
         string = ''.force_encoding(encoding)
         it "adds a constraint that returns false for #{encoding} encoding" do
           should_not include(string)
-          should_not include(string.to_sym)
+          should_not include(string.to_sym) unless jruby
         end
       end
     end
