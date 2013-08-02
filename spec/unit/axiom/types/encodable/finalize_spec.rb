@@ -31,9 +31,7 @@ describe Axiom::Types::Encodable, '#finalize' do
         string = '𝒜wesome'.force_encoding(encoding)
         it "adds a constraint that returns true for #{encoding} encoding" do
           should include(string)
-          pending_if jruby do
-            should include(string.to_sym)
-          end
+          should include(string.to_sym)
         end
       elsif encoding.ascii_compatible?
         string = ''.force_encoding(encoding)
