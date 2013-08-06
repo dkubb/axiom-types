@@ -6,7 +6,12 @@ describe Axiom::Types::Encodable, '#finalize' do
   subject { object.finalize }
 
   let(:object) { Class.new(Axiom::Types::Type).extend(described_class) }
-  let(:jruby)  { RUBY_PLATFORM.include?('java')                        }
+
+  # Test if Symbol encoding is supported
+  let(:symbol_encoding) do
+    encoding = Encoding::UTF_16BE
+    ''.force_encoding(encoding).to_sym.encoding.equal?(encoding)
+  end
 
   context 'when an ascii compatible encoding (UTF-8) is used' do
     it_should_behave_like 'a command method'
@@ -21,19 +26,19 @@ describe Axiom::Types::Encodable, '#finalize' do
         string = '𝒜wesome'.force_encoding(encoding)
         it "adds a constraint that returns true for #{encoding} encoding" do
           should include(string)
-          should include(string.to_sym) unless jruby
+          should include(string.to_sym) if symbol_encoding
         end
       elsif encoding.ascii_compatible?
         string = ''.force_encoding(encoding)
         it "adds a constraint that returns true for #{encoding} encoding" do
           should include(string)
-          should include(string.to_sym) unless jruby
+          should include(string.to_sym) if symbol_encoding
         end
       else
         string = ''.force_encoding(encoding)
         it "adds a constraint that returns false for #{encoding} encoding" do
           should_not include(string)
-          should_not include(string.to_sym) unless jruby
+          should_not include(string.to_sym) if symbol_encoding
         end
       end
     end
@@ -56,13 +61,13 @@ describe Axiom::Types::Encodable, '#finalize' do
         string = '𝒜wesome'.force_encoding(encoding)
         it "adds a constraint that returns true for #{encoding} encoding" do
           should include(string)
-          should include(string.to_sym) unless jruby
+          should include(string.to_sym) if symbol_encoding
         end
       else
         string = ''.force_encoding(encoding)
         it "adds a constraint that returns false for #{encoding} encoding" do
           should_not include(string)
-          should_not include(string.to_sym) unless jruby
+          should_not include(string.to_sym) if symbol_encoding
         end
       end
     end
