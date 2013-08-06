@@ -9,7 +9,7 @@ describe Axiom::Types::Encodable, '#finalize' do
 
   # Test if Symbol encoding is supported
   let(:symbol_encoding) do
-    encoding = Encoding::UTF_16BE
+    encoding = Encoding::UTF_8
     ''.force_encoding(encoding).to_sym.encoding.equal?(encoding)
   end
 
