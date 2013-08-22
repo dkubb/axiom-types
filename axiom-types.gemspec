@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.extra_rdoc_files = %w[LICENSE README.md TODO]
 
   gem.add_runtime_dependency('descendants_tracker', '~> 0.0.1')
-  gem.add_runtime_dependency('ice_nine',            '~> 0.8.0')
+  gem.add_runtime_dependency('ice_nine',            '~> 0.8')
 
   gem.add_development_dependency('bundler', '~> 1.3', '>= 1.3.5')
 end
