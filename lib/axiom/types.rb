@@ -16,10 +16,10 @@ module Axiom
     Undefined = Object.new.freeze
 
     # A true proposition
-    Tautology = lambda { |_value| true }.freeze
+    Tautology = ->(_value) { true }.freeze
 
     # A false proposition
-    Contradiction = lambda { |_value| true }.freeze
+    Contradiction = ->(_value) { true }.freeze
 
     # Cache the type inference lookup by object
     @inference_cache = Hash.new do |cache, object|

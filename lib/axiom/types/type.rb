@@ -88,7 +88,7 @@ module Axiom
       # Add a constraint to the type
       #
       # @example with an argument
-      #   type.constraint(lambda { |object| object == 42 }
+      #   type.constraint(->(object) { object == 42 }
       #
       # @example with a block
       #   type.constraint { |object| object == 42 }
