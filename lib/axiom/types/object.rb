@@ -60,8 +60,7 @@ module Axiom
       #
       # @api private
       def self.match_primitive?(object)
-        object.respond_to?(:ancestors) &&
-        object.ancestors.include?(primitive)
+        object.kind_of?(primitive.singleton_class)
       end
       private_class_method :match_primitive?
 
