@@ -1,5 +1,4 @@
-axiom-types
-===========
+# axiom-types
 
 Define types with optional constraints for use within axiom and other libraries.
 
@@ -15,8 +14,7 @@ Define types with optional constraints for use within axiom and other libraries.
 [codeclimate]: https://codeclimate.com/github/dkubb/axiom-types
 [coveralls]: https://coveralls.io/r/dkubb/axiom-types
 
-Examples
---------
+## Examples
 
 ```ruby
 # Setup constraints for all defined types
@@ -35,12 +33,10 @@ Name.include?('')        # => false
 Name.include?('a' * 31)  # => false
 ```
 
-Contributing
--------------
+## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-Copyright
----------
+## Copyright
 
 Copyright &copy; 2013 Dan Kubb. See LICENSE for details.
