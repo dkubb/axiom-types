@@ -77,9 +77,8 @@ module Axiom
       #
       # @api private
       def self.infer_from(key_type, value_type)
-        if self.key_type.equal?(key_type) && self.value_type.equal?(value_type)
-          self
-        end
+        self if self.key_type.equal?(key_type) &&
+                self.value_type.equal?(value_type)
       end
       private_class_method :infer_from
 
