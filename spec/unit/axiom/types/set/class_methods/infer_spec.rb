@@ -9,6 +9,12 @@ describe Axiom::Types::Set, '.infer' do
     object.finalize
   end
 
+  before do
+    # Initialize a custom type that will be used if the class lookup does not
+    # restrict matching to only types with an Object member_type
+    Axiom::Types.infer(Set[Float])
+  end
+
   context 'with Axiom::Types::Set' do
     let(:object) { described_class }
 

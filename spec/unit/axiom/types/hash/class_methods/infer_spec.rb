@@ -9,6 +9,13 @@ describe Axiom::Types::Hash, '.infer' do
     object.finalize
   end
 
+  before do
+    # Initialize custom types that will be used if the class lookup does not
+    # restrict matching to only types with an Object key and value types
+    Axiom::Types.infer(Hash[Object => Float])
+    Axiom::Types.infer(Hash[Float  => Object])
+  end
+
   context 'with Axiom::Types::Hash' do
     let(:object) { described_class }
 

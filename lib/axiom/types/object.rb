@@ -48,10 +48,22 @@ module Axiom
       #
       # @api private
       def self.infer_from_primitive_class(object)
-        self if object.respond_to?(:ancestors) &&
-                object.ancestors.include?(primitive)
+        self if match_primitive?(object)
       end
       private_class_method :infer_from_primitive_class
+
+      # Test if the type matches a primitive class
+      #
+      # @param [Object] object
+      #
+      # @return [Boolean]
+      #
+      # @api private
+      def self.match_primitive?(object)
+        object.respond_to?(:ancestors) &&
+        object.ancestors.include?(primitive)
+      end
+      private_class_method :match_primitive?
 
       # Add a constraint for the primitive
       #

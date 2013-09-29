@@ -9,6 +9,12 @@ describe Axiom::Types::Collection, '.infer' do
     object.finalize
   end
 
+  before do
+    # Initialize a custom type that will be used if the class lookup does not
+    # restrict matching to only types with an Object member_type
+    Axiom::Types.infer(SortedSet[Float])
+  end
+
   context 'with a base class' do
     let(:object) do
       Class.new(described_class) do

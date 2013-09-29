@@ -47,6 +47,18 @@ module Axiom
         super
       end
 
+      # Test if the type matches a primitive class
+      #
+      # @param [Object] object
+      #
+      # @return [Boolean]
+      #
+      # @api private
+      def self.match_primitive?(*)
+        super && key_type.equal?(Object) && value_type.equal?(Object)
+      end
+      private_class_method :match_primitive?
+
       # Infer the type from a primitive instance
       #
       # @param [Object] object
