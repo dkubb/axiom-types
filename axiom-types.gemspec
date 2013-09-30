@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.description = 'Abstract types for logic programming'
   gem.summary     = 'Define types with optional constraints for use within axiom and other libraries.'
   gem.homepage    = 'https://github.com/dkubb/axiom-types'
-  gem.licenses    = %w[MIT]
+  gem.license     = 'MIT'
 
   gem.require_paths    = %w[lib]
   gem.files            = `git ls-files`.split($/)
