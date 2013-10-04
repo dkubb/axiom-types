@@ -84,8 +84,7 @@ module Axiom
       #
       # @api private
       def self.infer_from_primitive_instance(object)
-        member      = object.first
-        member_type = Types.infer(member) || Object
+        member_type = Types.infer(object.first) || Object
         infer_from(member_type) || new_from(member_type)
       end
       private_class_method :infer_from_primitive_instance

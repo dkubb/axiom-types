@@ -9,10 +9,20 @@ describe Axiom::Types::Collection, '.infer' do
     object.finalize
   end
 
-  before do
-    # Initialize a custom type that will be used if the class lookup does not
-    # restrict matching to only types with an Object member_type
-    Axiom::Types.infer(SortedSet[Float])
+  context 'with the type' do
+    let(:object) { described_class }
+
+    context 'when the argument is the type object' do
+      let(:arg) { object }
+
+      it { should be(object) }
+    end
+
+    context 'when the argument is ::Enumerable' do
+      let(:arg) { ::Enumerable }
+
+      it { should be(object) }
+    end
   end
 
   context 'with a base class' do
@@ -24,6 +34,12 @@ describe Axiom::Types::Collection, '.infer' do
           true
         end
       end
+    end
+
+    before do
+      # Initialize a custom type that will be used if the class lookup does not
+      # restrict matching to only types with an Object member_type
+      Axiom::Types.infer(SortedSet[Float])
     end
 
     context 'when the argument is the type object' do
