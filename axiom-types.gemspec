@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths    = %w[lib]
   gem.files            = `git ls-files`.split($/)
   gem.test_files       = `git ls-files -- spec/unit`.split($/)
-  gem.extra_rdoc_files = %w[LICENSE README.md TODO]
+  gem.extra_rdoc_files = %w[LICENSE README.md CONTRIBUTING.md TODO]
 
   gem.add_dependency('descendants_tracker', '~> 0.0.1')
   gem.add_dependency('ice_nine',            '~> 0.9')
