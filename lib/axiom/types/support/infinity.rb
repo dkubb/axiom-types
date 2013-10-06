@@ -20,7 +20,7 @@ module Axiom
       def self.<=>(other)
         case other
         when ::BigDecimal                       then 1
-        when number                             then 0
+        when ->(arg) { arg == number }          then 0
         when ::Numeric, inverse.singleton_class then 1
         end
       end
