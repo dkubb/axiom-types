@@ -16,7 +16,7 @@ matrix:
   allow_failures:
     - rvm: 1.9.3       # mutant fails
     - rvm: 2.0.0       # mutant fails
-    - rvm: ruby-head   # travis broken
+    - rvm: ruby-head   # mutant fails
     - rvm: rbx-19mode  # mutant fails
 notifications:
   irc:
