@@ -1,7 +1,9 @@
 ---
 Attribute:
   enabled: true
-  exclude: []
+  exclude:
+  - Axiom::Types::LengthComparable
+  - Axiom::Types::ValueComparable
 BooleanParameter:
   enabled: true
   exclude: []

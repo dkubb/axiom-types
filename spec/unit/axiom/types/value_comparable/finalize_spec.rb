@@ -18,6 +18,7 @@ describe Axiom::Types::ValueComparable, '#finalize' do
 
   it { should be_frozen }
 
+  its(:range)      { should be_frozen }
   its(:constraint) { should be_frozen }
 
   it 'adds a constraint that returns true for a value within range' do

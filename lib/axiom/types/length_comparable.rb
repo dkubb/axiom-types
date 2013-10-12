@@ -6,6 +6,13 @@ module Axiom
     # Add a minimum and maximum length constraint to a type
     module LengthComparable
 
+      # The range of allowed lengths
+      #
+      # @return [Range]
+      #
+      # @api public
+      attr_reader :range
+
       # Hook called when module is extended
       #
       # Add #minimum_length and #maximum_length DSL methods to descendant.
@@ -31,6 +38,7 @@ module Axiom
       # @api private
       def finalize
         return self if frozen?
+        @range = IceNine.deep_freeze(minimum_length..maximum_length)
         has_length_within_range
         super
       end
@@ -45,7 +53,6 @@ module Axiom
       #
       # @api private
       def has_length_within_range
-        range = minimum_length..maximum_length
         constraint { |object| range.cover?(object.length) }
       end
 

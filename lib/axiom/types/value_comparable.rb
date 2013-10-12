@@ -6,6 +6,13 @@ module Axiom
     # Add a minimum and maximum value constraint to a type
     module ValueComparable
 
+      # The range of allowed values
+      #
+      # @return [Range]
+      #
+      # @api public
+      attr_reader :range
+
       # Hook called when module is extended
       #
       # Add #minimum and #maximum DSL methods to descendant.
@@ -27,6 +34,7 @@ module Axiom
       # @api private
       def finalize
         return self if frozen?
+        @range = IceNine.deep_freeze(minimum..maximum)
         has_value_within_range
         super
       end
@@ -41,7 +49,6 @@ module Axiom
       #
       # @api private
       def has_value_within_range
-        range = minimum..maximum
         constraint(range.method(:cover?))
       end
 
