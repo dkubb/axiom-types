@@ -22,7 +22,7 @@ describe Axiom::Types::Options, '#inherited' do
   end
 
   it 'delegates to the ancestor' do
-    ancestor.should_receive(:inherited).twice
+    expect(ancestor).to receive(:inherited).twice
     subject
   end
 

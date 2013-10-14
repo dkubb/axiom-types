@@ -13,7 +13,7 @@ describe Axiom::Types::Encodable, '.extended' do
     # RSpec tracks the original method (if any), then we add our own stub that
     # actually works, and finally when the example finishes RSpec will reset
     # the Module#extended method back to it's original state.
-    Module.any_instance.stub(:extended).with(object)
+    allow_any_instance_of(Module).to receive(:extended).with(object)
 
     delegated_ancestor = false
     Module.send(:undef_method, :extended)

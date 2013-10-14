@@ -11,7 +11,7 @@ describe Axiom::Types, '.finalize' do
   it_should_behave_like 'a command method'
 
   it 'finalizes the descendants' do
-    descendant.should_receive(:finalize)
+    expect(descendant).to receive(:finalize)
     subject
   end
 end
