@@ -131,6 +131,15 @@ module Axiom
         constraint(&set.method(:include?))
       end
 
+      # The base type for the type
+      #
+      # @return [Class<Axiom::Types::Type>]
+      #
+      # @api public
+      def self.base
+        base? ? self : superclass.base
+      end
+
       # Test if the type is a base type
       #
       # @return [Boolean]
