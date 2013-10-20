@@ -37,6 +37,15 @@ module Axiom
         super
       end
 
+      # The type name and primitive
+      #
+      # @return [String]
+      #
+      # @api public
+      def self.inspect
+        "#{base} (#{primitive})"
+      end
+
       # Infer the type if the primitive class matches
       #
       # @param [Object] object
