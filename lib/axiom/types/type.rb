@@ -131,6 +131,15 @@ module Axiom
         constraint(&set.method(:include?))
       end
 
+      # Test if the type is anonymous
+      #
+      # @return [Boolean]
+      #
+      # @api public
+      def self.anonymous?
+        name.to_s.empty?
+      end
+
       # Add new constraint to existing constraint, if any
       #
       # @param [#call] constraint
