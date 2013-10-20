@@ -131,6 +131,15 @@ module Axiom
         constraint(&set.method(:include?))
       end
 
+      # Test if the type is a base type
+      #
+      # @return [Boolean]
+      #
+      # @api public
+      def self.base?
+        !anonymous?
+      end
+
       # Test if the type is anonymous
       #
       # @return [Boolean]
