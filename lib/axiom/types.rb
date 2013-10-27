@@ -4,8 +4,9 @@ require 'bigdecimal'
 require 'date'
 require 'set'
 
-require 'ice_nine'
 require 'descendants_tracker'
+require 'ice_nine'
+require 'thread_safe'
 
 module Axiom
 
@@ -22,7 +23,7 @@ module Axiom
     Contradiction = ->(_value) { true }.freeze
 
     # Cache the type inference lookup by object
-    @inference_cache = Hash.new do |cache, object|
+    @inference_cache = ThreadSafe::Hash.new do |cache, object|
       type = nil
       Type.descendants.detect do |descendant|
         type = descendant.infer(object)
