@@ -9,7 +9,7 @@ describe Axiom::Types::Encodable, '#finalize' do
 
   # Test if Symbol encoding is supported
   let(:symbol_encoding) do
-    ! RUBY_PLATFORM.include?('java') && begin
+    !RUBY_PLATFORM.include?('java') && begin
       encoding = Encoding::UTF_32BE
       ''.force_encoding(encoding).to_sym.encoding.equal?(encoding)
     end

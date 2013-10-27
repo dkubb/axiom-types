@@ -38,7 +38,7 @@ module Axiom
         when number       then [self,    self]
         when ::Numeric    then [inverse, self]
         else
-          raise ::TypeError, "#{other.class} cannot be coerced"
+          fail ::TypeError, "#{other.class} cannot be coerced"
         end
       end
 
