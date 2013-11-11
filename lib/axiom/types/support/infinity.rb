@@ -5,25 +5,12 @@ module Axiom
 
     # Represent an infinite number
     class Infinity
+      extend Options, DescendantsTracker
       include ::Comparable, ::Singleton
 
-      # The inverse class
-      #
-      # @return [Class<NegativeInfinity>]
-      #
-      # @api private
-      def self.inverse
-        NegativeInfinity
-      end
+      accept_options :inverse, :number
 
-      # The numeric representation of infinity
-      #
-      # @return [Float]
-      #
-      # @api private
-      def self.number
-        ::Float::INFINITY
-      end
+      number ::Float::INFINITY
 
       # Test the number against infinity
       #
@@ -85,24 +72,7 @@ module Axiom
 
     # Represent a negative infinite number
     class NegativeInfinity < Infinity
-
-      # The inverse class
-      #
-      # @return [Class<Infinity>]
-      #
-      # @api private
-      def self.inverse
-        Infinity
-      end
-
-      # The numeric representation of negative infinity
-      #
-      # @return [Float]
-      #
-      # @api private
-      def self.number
-        -::Float::INFINITY
-      end
+      number(-::Float::INFINITY)
 
       # Test the number against negative infinity
       #
@@ -120,5 +90,10 @@ module Axiom
       end
 
     end # class NegativeInfinity
+
+    # Define inverse classes
+    Infinity.inverse NegativeInfinity
+    NegativeInfinity.inverse Infinity
+
   end # module Types
 end # module Axiom

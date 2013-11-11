@@ -63,8 +63,8 @@ module Axiom
   end # module Types
 end # module Axiom
 
-require 'axiom/types/support/infinity'
 require 'axiom/types/support/options'
+require 'axiom/types/support/infinity'
 
 require 'axiom/types/value_comparable'
 require 'axiom/types/length_comparable'
