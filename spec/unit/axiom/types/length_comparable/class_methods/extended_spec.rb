@@ -32,10 +32,12 @@ describe Axiom::Types::LengthComparable, '.extended' do
   end
 
   it 'sets the default minimum_length' do
-    expect(subject.minimum_length).to equal(Axiom::Types::Infinity)
+    expect(subject.minimum_length)
+      .to equal(Axiom::Types::Infinity.instance)
   end
 
   it 'sets the default maximum_length' do
-    expect(subject.maximum_length).to equal(Axiom::Types::NegativeInfinity)
+    expect(subject.maximum_length)
+      .to equal(Axiom::Types::NegativeInfinity.instance)
   end
 end

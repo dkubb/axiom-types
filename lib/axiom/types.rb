@@ -3,6 +3,7 @@
 require 'bigdecimal'
 require 'date'
 require 'set'
+require 'singleton'
 
 require 'descendants_tracker'
 require 'ice_nine'

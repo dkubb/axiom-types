@@ -65,7 +65,7 @@ TooManyInstanceVariables:
 TooManyMethods:
   enabled: true
   exclude: []
-  max_methods: 0
+  max_methods: 4
 TooManyStatements:
   enabled: true
   exclude:

@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-describe Axiom::Types::Infinity, '.<=>' do
+describe Axiom::Types::NegativeInfinity, '#<=>' do
   subject { object <=> other }
 
-  let(:object) { described_class }
+  let(:object) { described_class.instance }
 
   [
     1,                # Fixnum
@@ -17,7 +17,7 @@ describe Axiom::Types::Infinity, '.<=>' do
     context "when other object is a #{number.class}" do
       let(:other) { number }
 
-      it { should be(1) }
+      it { should be(-1) }
 
       it 'is symmetric' do
         should be(-(other <=> object))
@@ -25,33 +25,33 @@ describe Axiom::Types::Infinity, '.<=>' do
     end
   end
 
-  context 'when the other object is negative infinity' do
-    let(:other) { Axiom::Types::NegativeInfinity }
+  context 'when the other object is infinity' do
+    let(:other) { Axiom::Types::Infinity.instance }
 
-    it { should be(1) }
+    it { should be(-1) }
 
     it 'is symmetric' do
       should be(-(other <=> object))
     end
   end
 
-  context 'when the other object is infinity' do
+  context 'when the other object is negative infinity' do
     let(:other) { object }
 
     it { should be(0) }
 
     it 'is symmetric' do
-      should be(-(other <=> object))
+      should be(other <=> object)
     end
   end
 
-  context 'when the other object is Float::INFINITY' do
-    let(:other) { Float::INFINITY }
+  context 'when the other object is -Float::INFINITY' do
+    let(:other) { -Float::INFINITY }
 
     it { should be(0) }
 
     it 'is symmetric' do
-      should be(-(other <=> object))
+      should be(other <=> object)
     end
   end
 

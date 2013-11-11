@@ -26,8 +26,8 @@ module Axiom
         super
         descendant.class_eval do
           accept_options :minimum_length, :maximum_length
-          minimum_length Infinity
-          maximum_length NegativeInfinity
+          minimum_length Infinity.instance
+          maximum_length NegativeInfinity.instance
         end
       end
 

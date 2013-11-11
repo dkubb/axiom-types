@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-describe Axiom::Types::Infinity, '.coerce' do
+describe Axiom::Types::Infinity, '#coerce' do
   subject { object.coerce(other) }
 
-  let(:object) { described_class }
+  let(:object) { described_class.instance }
 
   [
     1,                # Fixnum
@@ -18,7 +18,7 @@ describe Axiom::Types::Infinity, '.coerce' do
       let(:other) { number }
 
       it 'coerces into an array containing inverse and self' do
-        should eql([Axiom::Types::NegativeInfinity, object])
+        should eql([Axiom::Types::NegativeInfinity.instance, object])
       end
 
       it 'coerces when comparing' do
@@ -32,7 +32,7 @@ describe Axiom::Types::Infinity, '.coerce' do
     let(:other) { Float::INFINITY }
 
     it 'coerces into an array containing inverse and self' do
-      should eql([Axiom::Types::Infinity, object])
+      should eql([Axiom::Types::Infinity.instance, object])
     end
 
     it 'coerces when comparing' do
@@ -45,7 +45,7 @@ describe Axiom::Types::Infinity, '.coerce' do
     let(:other) { -Float::INFINITY }
 
     it 'coerces into an array containing inverse and self' do
-      should eql([Axiom::Types::NegativeInfinity, object])
+      should eql([Axiom::Types::NegativeInfinity.instance, object])
     end
 
     it 'coerces when comparing' do

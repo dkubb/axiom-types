@@ -59,3 +59,7 @@ ConstantName:
 # Not all trivial readers/writers can be defined with attr_* methods
 TrivialAccessors:
   Enabled: false
+
+# The #<=> method argument has an underscore because it is not referenced
+OpMethod:
+  Enabled: false
