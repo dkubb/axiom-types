@@ -6,19 +6,18 @@ rvm:
   - 1.9.3
   - 2.0.0
   - ruby-head
-  - rbx-19mode
+  - rbx
 matrix:
   include:
-    - rvm: jruby-19mode
+    - rvm: jruby
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"
     - rvm: jruby-head
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"
   allow_failures:
-    - rvm: 1.9.3       # mutant fails
-    - rvm: 2.0.0       # mutant fails
-    - rvm: ruby-head   # mutant fails
-    - rvm: rbx-19mode  # mutant fails
-    - rvm: jruby-head  # travis broken
+    - rvm: 1.9.3      # mutant fails
+    - rvm: 2.0.0      # mutant fails
+    - rvm: ruby-head  # mutant fails
+    - rvm: rbx        # mutant fails
 notifications:
   irc:
     channels:
