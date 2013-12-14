@@ -41,7 +41,7 @@ module Axiom
       def coerce(other)
         case other
         when BigDecimal        then [inverse, self]
-        when self.class.number then [self,          self]
+        when self.class.number then [self,    self]
         when ::Numeric         then [inverse, self]
         else
           fail TypeError, "#{other.class} cannot be coerced"
