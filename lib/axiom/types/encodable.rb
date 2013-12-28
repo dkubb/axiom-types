@@ -69,7 +69,6 @@ module Axiom
         constraint { |object| object.encoding.equal?(encoding) }
       end
 
-    end
-
+    end # module Encodable
   end # module Types
 end # module Axiom
