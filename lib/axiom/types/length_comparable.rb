@@ -39,7 +39,7 @@ module Axiom
       def finalize
         return self if frozen?
         @range = IceNine.deep_freeze(minimum_length..maximum_length)
-        has_length_within_range
+        use_length_within_range
         super
       end
 
@@ -52,7 +52,7 @@ module Axiom
       # @todo freeze the minimum_length and maximum_length
       #
       # @api private
-      def has_length_within_range
+      def use_length_within_range
         constraint { |object| range.cover?(object.length) }
       end
 

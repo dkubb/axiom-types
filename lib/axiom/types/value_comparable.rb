@@ -35,7 +35,7 @@ module Axiom
       def finalize
         return self if frozen?
         @range = IceNine.deep_freeze(minimum..maximum)
-        has_value_within_range
+        use_value_within_range
         super
       end
 
@@ -48,7 +48,7 @@ module Axiom
       # @todo freeze the minimum and maximum
       #
       # @api private
-      def has_value_within_range
+      def use_value_within_range
         constraint(range.method(:cover?))
       end
 
