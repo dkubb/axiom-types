@@ -12,7 +12,12 @@ ClassVariable:
   exclude: []
 ControlParameter:
   enabled: true
-  exclude: []
+  exclude:
+  - Axiom::Types::Boolean#self.infer_from_primitive_class
+  - Axiom::Types::Collection#self.infer_from
+  - Axiom::Types::Infinity#<=>
+  - Axiom::Types::Object#self.infer_from_primitive_class
+  - Axiom::Types::Type#self.infer
 DataClump:
   enabled: true
   exclude: []
