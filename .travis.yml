@@ -1,6 +1,6 @@
 language: ruby
 bundler_args: --without yard guard benchmarks
-script: "bundle exec rake ci"
+script: "bundle exec rake ci:metrics"
 rvm:
   - 1.9.3
   - 2.0.0
@@ -18,11 +18,9 @@ matrix:
     - rvm: jruby-head
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"  # for simplecov
   allow_failures:
-    - rvm: 1.9.3      # mutant fails
-    - rvm: 2.0.0      # mutant fails
-    - rvm: 2.1.0      # mutant fails
-    - rvm: ruby-head  # mutant fails
-    - rvm: rbx        # mutant fails
+    - rvm: jruby-20mode  # bouncy-castle-java install error
+    - rvm: jruby-21mode  # bouncy-castle-java install error
+    - rvm: jruby-head    # bouncy-castle-java install error
   fast_finish: true
 notifications:
   irc:
