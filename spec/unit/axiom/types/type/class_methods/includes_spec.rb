@@ -26,7 +26,7 @@ describe Axiom::Types::Type, '.includes' do
     end
 
     it 'removes duplicate members' do
-      expect(member).to receive(:frozen?).and_return(true)
+      expect(member).to receive(:freeze).and_return(member)
       expect(member).to receive(:hash).exactly(3).times.and_return(1)
       subject
       expect(object).to include(member)
