@@ -19,8 +19,8 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 1.9.3'
 
-  gem.add_runtime_dependency('descendants_tracker', '~> 0.0.1')
-  gem.add_runtime_dependency('ice_nine',            '~> 0.9')
+  gem.add_runtime_dependency('descendants_tracker', '~> 0.0.3')
+  gem.add_runtime_dependency('ice_nine',            '~> 0.11.0')
   gem.add_runtime_dependency('thread_safe',         '~> 0.1.3')
 
   gem.add_development_dependency('bundler', '~> 1.3', '>= 1.3.5')
