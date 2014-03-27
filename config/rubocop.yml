@@ -5,6 +5,11 @@ ParameterLists:
   Max: 3
   CountKeywordArgs: true
 
+# Limit method length
+MethodLength:
+  CountComments: false
+  Max: 7
+
 # Avoid more than `Max` levels of nesting.
 BlockNesting:
   Max: 3
@@ -54,10 +59,31 @@ ConstantName:
 TrivialAccessors:
   Enabled: false
 
-# The #<=> method argument has an underscore because it is not referenced
-OpMethod:
+# Do not prefer do/end over {} for multiline blocks
+Blocks:
   Enabled: false
 
 # Allow empty lines around body
 EmptyLinesAroundBody:
+  Enabled: false
+
+# Prefer String#% over Kernel#sprintf
+FormatString:
+  Enabled: false
+
+# Use square brackets for literal Array objects
+PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%':  ()
+    '%i': '[]'
+    '%q': ()
+    '%Q': ()
+    '%r': '{}'
+    '%s': ()
+    '%w': '[]'
+    '%W': '[]'
+    '%x': ()
+
+# The #<=> method argument has an underscore because it is not referenced
+OpMethod:
   Enabled: false
