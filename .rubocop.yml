@@ -4,3 +4,4 @@ AllCops:
   Excludes:
     - 'Gemfile.devtools'
     - 'vendor/**'
+    - 'lib/axiom-types.rb'
