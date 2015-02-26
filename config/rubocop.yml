@@ -143,3 +143,7 @@ OpMethod:
 # Allow code to be aligned more nicely
 SingleSpaceBeforeFirstArg:
   Enabled: false
+
+AmbiguousOperator:
+  Exclude:
+    - lib/axiom/types/float.rb
