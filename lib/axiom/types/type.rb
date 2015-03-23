@@ -133,6 +133,9 @@ module Axiom
 
       # The base type for the type
       #
+      # @example
+      #   type.base  # => Axiom::Types::Object
+      #
       # @return [Class<Axiom::Types::Type>]
       #
       # @api public
@@ -142,6 +145,9 @@ module Axiom
 
       # Test if the type is a base type
       #
+      # @example
+      #   type.base?  # => true
+      #
       # @return [Boolean]
       #
       # @api public
@@ -150,6 +156,9 @@ module Axiom
       end
 
       # Test if the type is anonymous
+      #
+      # @example
+      #   type.anonymous?  # => false
       #
       # @return [Boolean]
       #
@@ -166,13 +175,13 @@ module Axiom
       #
       # @api private
       def self.add_constraint(constraint)
-        current = self.constraint
-        @constraint =
-          if current
-            ->(object) { constraint.call(object) && current.call(object) }
-          else
-            constraint
-          end
+        # rubocop:disable MethodCallParentheses
+        current = constraint()
+        @constraint = if current
+          ->(object) { constraint.call(object) && current.call(object) }
+        else
+          constraint
+        end
       end
 
       private_class_method :add_constraint

@@ -59,12 +59,20 @@ ConstantName:
 TrivialAccessors:
   Enabled: false
 
-# Do not prefer do/end over {} for multiline blocks
-Blocks:
+# Allow empty lines around class body
+EmptyLinesAroundClassBody:
   Enabled: false
 
-# Allow empty lines around body
-EmptyLinesAroundBody:
+# Allow empty lines around module body
+EmptyLinesAroundModuleBody:
+  Enabled: false
+
+# Allow empty lines around block body
+EmptyLinesAroundBlockBody:
+  Enabled: false
+
+# Allow multiple line operations to not require indentation
+MultilineOperationIndentation:
   Enabled: false
 
 # Prefer String#% over Kernel#sprintf
@@ -74,7 +82,7 @@ FormatString:
 # Use square brackets for literal Array objects
 PercentLiteralDelimiters:
   PreferredDelimiters:
-    '%':  ()
+    '%':  '{}'
     '%i': '[]'
     '%q': ()
     '%Q': ()
@@ -83,6 +91,39 @@ PercentLiteralDelimiters:
     '%w': '[]'
     '%W': '[]'
     '%x': ()
+
+# Use %i[...] for arrays of symbols
+SymbolArray:
+  Enabled: true
+
+# Align if/else blocks with the variable assignment
+EndAlignment:
+  AlignWith: variable
+
+# Do not always align parameters when it is easier to read
+AlignParameters:
+  Exclude:
+    - spec/**/*_spec.rb
+
+# Align code so it is more readable
+SingleSpaceBeforeFirstArg:
+  Enabled: false
+
+# Prefer #kind_of? over #is_a?
+ClassCheck:
+  EnforcedStyle: kind_of?
+
+# Do not prefer double quotes to be used when %q or %Q is more appropriate
+UnneededPercentQ:
+  Enabled: false
+
+# Allow a maximum ABC score
+Metrics/AbcSize:
+  Max: 8.6
+
+# Do not prefer lambda.call(...) over lambda.(...)
+LambdaCall:
+  Enabled: false
 
 # The #<=> method argument has an underscore because it is not referenced
 OpMethod:
