@@ -9,7 +9,5 @@ platforms :rbx do
 end
 
 group :development, :test do
-  gem 'devtools', git: 'https://github.com/rom-rb/devtools.git'
+  gem 'devtools', '=  0.0.2', git: 'https://github.com/mbj/devtools.git'
 end
-
-eval_gemfile 'Gemfile.devtools'

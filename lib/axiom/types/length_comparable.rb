@@ -8,6 +8,9 @@ module Axiom
 
       # The range of allowed lengths
       #
+      # @example
+      #   type.range  # => 1..255
+      #
       # @return [Range]
       #
       # @api public
