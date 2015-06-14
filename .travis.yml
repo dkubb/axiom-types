@@ -1,32 +1,21 @@
 language: ruby
-before_install: gem install bundler
-bundler_args: --without yard guard benchmarks
+bundler_args: --without yard guard benchmarks --path vendor/bundle --jobs=3 --retry=3
 script: "bundle exec rake ci:metrics"
+cache: bundler
+sudo: false
 rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1.0
-  - 2.1.1
+  - 2.0
+  - 2.1
+  - 2.2
   - ruby-head
   - rbx-2
 matrix:
   include:
-    - rvm: jruby-19mode
-      env: JRUBY_OPTS="$JRUBY_OPTS --debug"  # for simplecov
-    - rvm: jruby-20mode
-      env: JRUBY_OPTS="$JRUBY_OPTS --debug"  # for simplecov
-    - rvm: jruby-21mode
-      env: JRUBY_OPTS="$JRUBY_OPTS --debug"  # for simplecov
-    - rvm: jruby-head
-      env: JRUBY_OPTS="$JRUBY_OPTS --debug"  # for simplecov
+    - rvm: jruby
+      env: JRUBY_OPTS="$JRUBY_OPTS --2.0"
   allow_failures:
-    - rvm: 2.1.0  # buggy runtime
     - rvm: ruby-head
-    - rvm: jruby-head
   fast_finish: true
-notifications:
-  irc:
-    channels:
-      - irc.freenode.org#rom-rb
-    on_success: never
-    on_failure: change
+env:
+  global:
+    - JRUBY_OPTS="$JRUBY_OPTS --debug"  # for simplecov

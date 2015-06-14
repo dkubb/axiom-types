@@ -2,11 +2,9 @@
 
 if ENV['COVERAGE'] == 'true'
   require 'simplecov'
-  require 'coveralls'
 
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-    SimpleCov::Formatter::HTMLFormatter,
-    Coveralls::SimpleCov::Formatter
+    SimpleCov::Formatter::HTMLFormatter
   ]
 
   SimpleCov.start do
@@ -26,6 +24,8 @@ require 'axiom-types'
 include Axiom::Types
 
 RSpec.configure do |config|
+  config.raise_errors_for_deprecations!
+
   config.expect_with :rspec do |expect_with|
     expect_with.syntax = :expect
   end

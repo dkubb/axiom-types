@@ -1,7 +1,6 @@
 AllCops:
-  Includes:
+  Include:
     - 'Gemfile'
-  Excludes:
-    - 'Gemfile.devtools'
-    - 'vendor/**'
+  Exclude:
+    - 'vendor/**/*'
     - 'lib/axiom-types.rb'
