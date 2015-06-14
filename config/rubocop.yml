@@ -34,6 +34,8 @@ AccessModifierIndentation:
 # Limit line length
 LineLength:
   Max: 79
+  Exclude:
+    - Gemfile
 
 # Disable documentation checking until a class needs to be documented once
 Documentation:
@@ -59,12 +61,20 @@ ConstantName:
 TrivialAccessors:
   Enabled: false
 
-# Do not prefer do/end over {} for multiline blocks
-Blocks:
+# Allow empty lines around class body
+EmptyLinesAroundClassBody:
   Enabled: false
 
-# Allow empty lines around body
-EmptyLinesAroundBody:
+# Allow empty lines around module body
+EmptyLinesAroundModuleBody:
+  Enabled: false
+
+# Allow empty lines around block body
+EmptyLinesAroundBlockBody:
+  Enabled: false
+
+# Allow multiple line operations to not require indentation
+MultilineOperationIndentation:
   Enabled: false
 
 # Prefer String#% over Kernel#sprintf
@@ -74,7 +84,7 @@ FormatString:
 # Use square brackets for literal Array objects
 PercentLiteralDelimiters:
   PreferredDelimiters:
-    '%':  ()
+    '%':  '{}'
     '%i': '[]'
     '%q': ()
     '%Q': ()
@@ -84,6 +94,52 @@ PercentLiteralDelimiters:
     '%W': '[]'
     '%x': ()
 
+# Do not use %i[...] for arrays of symbols
+SymbolArray:
+  Enabled: false  # Enable when supported by JRuby
+
+# Align if/else blocks with the variable assignment
+EndAlignment:
+  AlignWith: variable
+
+# Do not always align parameters when it is easier to read
+AlignParameters:
+  Exclude:
+    - spec/**/*_spec.rb
+
+# Prefer #kind_of? over #is_a?
+ClassCheck:
+  EnforcedStyle: kind_of?
+
+# Do not prefer double quotes to be used when %q or %Q is more appropriate
+UnneededPercentQ:
+  Enabled: false
+
+# Allow a maximum ABC score
+Metrics/AbcSize:
+  Max: 7.68
+
+# Do not prefer lambda.call(...) over lambda.(...)
+LambdaCall:
+  Enabled: false
+
+# To allow alignment of similar expressions we want to allow more than one
+# space around operators:
+#
+# let(:a) { bar    + something }
+# let(:b) { foobar + something }
+#
+SpaceAroundOperators:
+  Enabled: false
+
+# Parallel Assignment is allowed
+ParallelAssignment:
+  Enabled: false
+
 # The #<=> method argument has an underscore because it is not referenced
 OpMethod:
+  Enabled: false
+
+# Allow code to be aligned more nicely
+SingleSpaceBeforeFirstArg:
   Enabled: false

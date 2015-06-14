@@ -39,6 +39,9 @@ module Axiom
 
       # The type name and primitive
       #
+      # @example
+      #   type.inspect  # => "Axiom::Types::Object (Object)"
+      #
       # @return [String]
       #
       # @api public

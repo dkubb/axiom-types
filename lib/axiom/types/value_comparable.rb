@@ -8,6 +8,9 @@ module Axiom
 
       # The range of allowed values
       #
+      # @example
+      #   type.range  # => 1..10
+      #
       # @return [Range]
       #
       # @api public
