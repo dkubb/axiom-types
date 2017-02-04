@@ -9,5 +9,5 @@ platforms :rbx do
 end
 
 group :development, :test do
-  gem 'devtools', '= 0.0.2', git: 'https://github.com/mbj/devtools.git'
+  gem 'devtools', '~> 0.1.16'
 end

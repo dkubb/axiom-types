@@ -18,6 +18,9 @@ ControlParameter:
   - Axiom::Types::Infinity#<=>
   - Axiom::Types::Object#self.infer_from_primitive_class
   - Axiom::Types::Type#self.infer
+ManualDispatch:
+  exclude:
+  - Axiom::Types::Options#assert_method_available
 DataClump:
   enabled: true
   exclude: []

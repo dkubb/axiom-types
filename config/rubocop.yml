@@ -37,6 +37,10 @@ LineLength:
   Exclude:
     - Gemfile
 
+# Ignore block length
+BlockLength:
+  Enabled: false
+
 # Disable documentation checking until a class needs to be documented once
 Documentation:
   Enabled: false
@@ -100,7 +104,7 @@ SymbolArray:
 
 # Align if/else blocks with the variable assignment
 EndAlignment:
-  AlignWith: variable
+  EnforcedStyleAlignWith: variable
 
 # Do not always align parameters when it is easier to read
 AlignParameters:
@@ -141,7 +145,11 @@ OpMethod:
   Enabled: false
 
 # Allow code to be aligned more nicely
-SingleSpaceBeforeFirstArg:
+Style/SpaceBeforeFirstArg:
+  Enabled: false
+
+# Allow fail to be used rather than raise
+Style/SignalException:
   Enabled: false
 
 AmbiguousOperator:

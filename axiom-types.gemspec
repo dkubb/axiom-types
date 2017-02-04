@@ -21,7 +21,7 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency('descendants_tracker', '~> 0.0',  '>= 0.0.4')
   gem.add_runtime_dependency('ice_nine',            '~> 0.11', '>= 0.11.0')
-  gem.add_runtime_dependency('thread_safe',         '~> 0.3',  '>= 0.3.1')
+  gem.add_runtime_dependency('concurrent-ruby',     '~> 1.0',  '>= 1.0.4')
 
   gem.add_development_dependency('bundler')
 end
