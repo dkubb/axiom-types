@@ -7,7 +7,7 @@ require 'singleton'
 
 require 'descendants_tracker'
 require 'ice_nine'
-require 'thread_safe'
+require 'concurrent'
 
 module Axiom
 
@@ -24,7 +24,7 @@ module Axiom
     Contradiction = ->(_value) { true }.freeze
 
     # Cache the type inference lookup by object
-    @inference_cache = ThreadSafe::Cache.new do |cache, object|
+    @inference_cache = Concurrent::Hash.new do |cache, object|
       type = nil
       Type.descendants.detect do |descendant|
         type = descendant.infer(object)
