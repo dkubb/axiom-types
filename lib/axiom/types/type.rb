@@ -175,7 +175,7 @@ module Axiom
       #
       # @api private
       def self.add_constraint(constraint)
-        # rubocop:disable MethodCallParentheses
+        # rubocop:disable Style/MethodCallWithoutArgsParentheses
         current = constraint()
         @constraint = if current
           ->(object) { constraint.call(object) && current.call(object) }
