@@ -100,7 +100,7 @@ SymbolArray:
 
 # Align if/else blocks with the variable assignment
 EndAlignment:
-  AlignWith: variable
+  EnforcedStyleAlignWith: variable
 
 # Do not always align parameters when it is easier to read
 AlignParameters:
@@ -141,7 +141,7 @@ OpMethod:
   Enabled: false
 
 # Allow code to be aligned more nicely
-SingleSpaceBeforeFirstArg:
+Style/SpaceBeforeFirstArg:
   Enabled: false
 
 AmbiguousOperator:
