@@ -39,7 +39,7 @@ module Axiom
         return self if frozen?
         @range = IceNine.deep_freeze(minimum..maximum)
         use_value_within_range
-        super
+        super()
       end
 
     private
@@ -52,7 +52,7 @@ module Axiom
       #
       # @api private
       def use_value_within_range
-        constraint(range.method(:cover?))
+        constraint(range.public_method(:cover?))
       end
 
     end # module ValueComparable
