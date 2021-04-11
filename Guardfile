@@ -1,7 +1,7 @@
 guard :bundler do
   watch('Gemfile')
   watch('Gemfile.lock')
-  watch(%w{.+.gemspec\z})
+  watch(%w[.+.gemspec\z])
 end
 
 guard :rspec, cli: File.read('.rspec').split.push('--fail-fast').join(' '), keep_failed: false do
