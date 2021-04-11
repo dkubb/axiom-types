@@ -24,7 +24,7 @@ guard :rspec, cli: File.read('.rspec').split.push('--fail-fast').join(' '), keep
 end
 
 guard :rubocop, cli: %w[--config config/rubocop.yml] do
-  watch(%r{.+\.(?:rb|rake)\z})
+  watch(/.+\.(?:rb|rake)\z/)
   watch(%r{\Aconfig/rubocop\.yml\z})  { |m| File.dirname(m[0]) }
   watch(%r{(?:.+/)?\.rubocop\.yml\z}) { |m| File.dirname(m[0]) }
 end
