@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 guard :bundler do
   watch('Gemfile')
   watch('Gemfile.lock')
