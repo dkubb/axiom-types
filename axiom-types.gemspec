@@ -1,4 +1,4 @@
-require File.expand_path('../lib/axiom/types/version', __FILE__)
+require File.expand_path('lib/axiom/types/version', __dir__)
 
 Gem::Specification.new do |gem|
   gem.name        = 'axiom-types'
