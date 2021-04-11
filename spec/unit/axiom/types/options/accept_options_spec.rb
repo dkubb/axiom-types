@@ -7,7 +7,7 @@ describe Axiom::Types::Options, '#accept_options' do
   let(:descendant) { Class.new(object)                                }
 
   context 'with valid options' do
-    let(:new_options) { [:primitive, :coerce_method] }
+    let(:new_options) { %i[primitive coerce_method] }
 
     it_should_behave_like 'a command method'
     it_should_behave_like 'an idempotent method'
